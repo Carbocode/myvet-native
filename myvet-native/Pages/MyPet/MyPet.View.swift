@@ -2,27 +2,17 @@
 //  MyPetView.swift
 //  myvet-native
 //
-//  Created by Ligmab Allz on 2024-10-02.
+//  Created by Ligmab Allz on 06/03/25.
 //
 
 import SwiftUI
 
 struct MyPetView: View {
+    @State private var selectedAnimal: Animal?
+
     var body: some View {
-        
-        @ObservedObject var viewModel = MyPetViewModel()
-        
-        NavigationView {
-            ScrollView {
-                VStack{
-                    ForEach(viewModel.animals) { animal in
-                        AnimalCardView(viewModel: AnimalCardViewModel(animal: animal))
-                    }
-                }
-                .padding(.vertical, 10)
-            }
-            .navigationTitle("I miei animali")  // Titolo nella barra di navigazione
-            .navigationBarTitleDisplayMode(.large)
+        NavigationSplitView {
+            AnimalListView(selectedAnimal: $selectedAnimal)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Text("MyPet")
@@ -36,6 +26,14 @@ struct MyPetView: View {
                         Image(systemName: "plus")
                     }
                 }
+            }
+        } detail: {
+            // Detail: Dettagli dell'animale selezionato
+            if let selectedAnimal = selectedAnimal {
+                AnimalView(viewModel: AnimalViewModel(animal: selectedAnimal))
+            } else {
+                Text("Seleziona un animale")
+                    .foregroundColor(.gray)
             }
         }
     }

@@ -8,7 +8,9 @@
 import Foundation
 
 struct Config {
-    static let baseURL = URL(string: "https://myvetbusiness.it/")  // URL base per le chiamate API
-    static let imgURL = URL(string: "imgs/", relativeTo: baseURL)  // URL base per le chiamate API
-    static let animalURL = URL(string: "animals/", relativeTo: imgURL)  // URL base per le chiamate API
+    static let baseURL = URL(string: "https://dev.myvetbusiness.it")  // URL base per le chiamate API
+    static let imgURL = baseURL!.appendingPathComponent("/imgs") // URL base per le chiamate API
+    static let animalURL = imgURL.appendingPathComponent("/animals") // URL base per le chiamate API
+    static let apiVersion = "/v1.0"
+    static let apiURL = baseURL!.appendingPathComponent(apiVersion)  // URL base per le chiamate API
 }

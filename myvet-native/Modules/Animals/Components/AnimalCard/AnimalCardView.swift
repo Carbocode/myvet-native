@@ -13,7 +13,7 @@ struct AnimalCardView: View {
     var body: some View {
            
             HStack{
-                let fullURL = URL(string: viewModel.animal.image, relativeTo: Config.animalURL)
+                let fullURL = Config.animalURL.appendingPathComponent("/" + (viewModel.animal.immagine ?? "/default.png"))
                 AsyncImage(url: fullURL)
                 { image in
                     image
@@ -24,10 +24,9 @@ struct AnimalCardView: View {
                 }
                 .frame(width: 80, height: 80)
                 .clipShape(RoundedRectangle(cornerRadius: 25, style: .continuous))
-                .padding(10)
                 
                 VStack(alignment: .leading){
-                    Text(viewModel.animal.name)
+                    Text(viewModel.animal.nome)
                         .font(.headline)
                         .fontWeight(.bold)
                         .foregroundColor(.primary)
@@ -42,19 +41,6 @@ struct AnimalCardView: View {
                 
                 
             }
-            .background(
-                RoundedRectangle(cornerRadius: 30, style: .continuous)
-                    .fill(Color(.systemBackground))
-                    .shadow(radius: 3, x:0, y: 2)
-            )
-            .padding(.horizontal, 20)
-            .padding(.vertical, 2)
         
     }
-}
-
-#Preview {
-    let animal: Animal = .init(id: 1, userId: 1, name: "Animalo", breedId: 1, birthDate: Date(), gender: "F", sizeId: 2, sterilized: true, insured: false, image: "default.png")
-    let viewModel: AnimalCardViewModel = .init(animal: animal)
-    AnimalCardView(viewModel: viewModel)
 }
