@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var authManager = AuthManager.shared
     
     var body: some View {
             Group {
-                if AuthManager.shared.isAuthenticated {
+                if authManager.isAuthenticated {
                     TabNavView()
                 } else {
                     LoginView()

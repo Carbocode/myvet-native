@@ -9,17 +9,21 @@ import SwiftUI
 
 struct AnimalListView: View {
     @ObservedObject var viewModel = AnimalListViewModel()
-    @Binding var selectedAnimal: Animal?
+    @State var selectedAnimal: Animal? = nil
 
     var body: some View {
         
             // Sidebar: Elenco degli animali
-            List(viewModel.animals, selection: $selectedAnimal) { animal in
-                NavigationLink(destination: AnimalView(viewModel: AnimalViewModel(animal: animal))) {
-                    AnimalCardView(viewModel: AnimalCardViewModel(animal: animal))
+            List(viewModel.animals, id: \.id) { animal in
+                NavigationLink(destination: AnimalView(animal: animal)) {
+                    AnimalCardView(animal: animal)
                 }
             }
             .navigationTitle("I miei animali")
             .listStyle(.plain)
     }
+}
+
+#Preview {
+    AnimalListView(selectedAnimal: nil)
 }

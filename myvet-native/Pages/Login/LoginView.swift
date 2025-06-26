@@ -15,46 +15,75 @@ struct LoginView: View {
             Text("Login")
                 .font(.largeTitle)
                 .fontWeight(.bold)
-                .padding(.bottom, 40)
-            
-            TextField("Email", text: $viewModel.loginRequest.Email)
-                .padding()
-                .background(Color.gray.opacity(0.2))
-                .cornerRadius(8)
-                .keyboardType(.emailAddress)
-                .autocapitalization(.none)
                 .padding(.bottom, 20)
             
-            SecureField("Password", text: $viewModel.loginRequest.Password)
-                .padding()
-                .background(Color.gray.opacity(0.2))
-                .cornerRadius(8)
-                .padding(.bottom, 30)
-            
-            if viewModel.isLoading {
-                ProgressView()
-                    .padding(.bottom, 20)
-            }
-            
-            Button(action: {
-                viewModel.handleLogin()
-            }) {
-                Text("Login")
+            HStack {
+#if os(macOS)
+                Text("Email")
                     .font(.headline)
-                    .foregroundColor(.white)
+                    .frame(width: 80, alignment: .trailing)
+#endif
+                TextField("Email", text: $viewModel.loginRequest.Email)
+#if os(iOS)
                     .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(Color.blue)
-                    .cornerRadius(8)
+                    .glassEffect()
+                    .keyboardType(.emailAddress)
+                    .autocapitalization(.none)
+#endif
             }
-            .disabled(viewModel.isLoading)
-            .alert(isPresented: $viewModel.showAlert) {
-                Alert(title: Text("Login Failed"), message: Text(viewModel.alertMessage), dismissButton: .default(Text("OK")))
+            .padding(.bottom, 10)
+            
+
+            HStack {
+#if os(macOS)
+                Text("Password")
+                    .font(.headline)
+                    .frame(width: 80, alignment: .trailing)
+#endif
+                SecureField("Password", text: $viewModel.loginRequest.Password)
+#if os(iOS)
+                    .padding()
+                    .glassEffect()
+#endif
             }
+            .padding(.bottom, 20)
+
+            HStack {
+                Spacer()
+                Button(action: {
+                    viewModel.handleLogin()
+                }) {
+                    HStack {
+                        if viewModel.isLoading {
+                            ProgressView()
+                                .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                        } else {
+                            Text("Login")
+                                .font(.headline)
+                        }
                     }
-                    .padding()
                 }
+#if os(iOS)
+                .buttonStyle(.borderedProminent)
+#elseif os(macOS)
+                .buttonStyle(.bordered)
+#endif
+                .tint(.blue)
+                .controlSize(.extraLarge)
+                .disabled(viewModel.isLoading)
+                .alert(isPresented: $viewModel.showAlert) {
+                    Alert(title: Text("Login Failed"), message: Text(viewModel.alertMessage), dismissButton: .default(Text("OK")))
+                }
+                .buttonStyle(.glass)
             }
+            
+        }
+        .frame(maxHeight: .infinity, alignment: .top)
+        .frame(maxWidth: 400)
+        .padding()
+    }
+}
+
 
 #Preview {
     LoginView()

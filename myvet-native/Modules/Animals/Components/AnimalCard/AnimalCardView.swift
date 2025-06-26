@@ -10,6 +10,10 @@ import SwiftUI
 struct AnimalCardView: View {
     @ObservedObject var viewModel: AnimalCardViewModel
     
+    init(animal: Animal){
+        self.viewModel = .init(animal: animal)
+    }
+    
     var body: some View {
            
             HStack{

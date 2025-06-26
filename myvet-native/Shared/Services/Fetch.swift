@@ -5,7 +5,7 @@ class Fetch {
     private static let debugMode = true // Imposta su `false` per disattivare i log
     
     /// Metodo generico per effettuare richieste HTTP
-    private static func request<T: Decodable>(
+    private static func request<T: Decodable & Sendable>(
         endpoint: String,
         method: String,
         body: Encodable? = nil,
@@ -35,7 +35,9 @@ class Fetch {
             if let jsonData = encodeBody(body) {
                 urlRequest.httpBody = jsonData
             } else {
-                completion(.failure(NSError(domain: "JSONEncodingError", code: -3, userInfo: nil)))
+                DispatchQueue.main.async {
+                    completion(.failure(NSError(domain: "JSONEncodingError", code: -3, userInfo: nil)))
+                }
                 return
             }
         }
@@ -43,12 +45,16 @@ class Fetch {
         let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
             if let error = error {
                 log("❌ [Fetch] Errore nella richiesta: \(error.localizedDescription)")
-                completion(.failure(error))
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
                 return
             }
             
             guard let httpResponse = response as? HTTPURLResponse else {
-                completion(.failure(NSError(domain: "InvalidResponse", code: -1, userInfo: nil)))
+                DispatchQueue.main.async {
+                    completion(.failure(NSError(domain: "InvalidResponse", code: -1, userInfo: nil)))
+                }
                 return
             }
             
@@ -56,18 +62,22 @@ class Fetch {
             
             guard let data = data else {
                 log("❌ [Fetch] Nessun dato ricevuto")
-                completion(.failure(NSError(domain: "NoData", code: -2, userInfo: nil)))
+                DispatchQueue.main.async {
+                    completion(.failure(NSError(domain: "NoData", code: -2, userInfo: nil)))
+                }
                 return
             }
             
-            handleResponse(data: data, completion: completion)
+            DispatchQueue.main.async {
+                handleResponse(data: data, completion: completion)
+            }
         }
         
         task.resume()
     }
     
     /// Metodo GET
-    static func get<T: Decodable>(
+    static func get<T: Decodable & Sendable>(
         endpoint: String,
         queryParams: [URLQueryItem]? = nil,
         headers: [String: String] = [:],
@@ -77,7 +87,7 @@ class Fetch {
     }
     
     /// Metodo POST
-    static func post<T: Decodable>(
+    static func post<T: Decodable & Sendable>(
         endpoint: String,
         body: Encodable,
         queryParams: [URLQueryItem]? = nil,
@@ -88,7 +98,7 @@ class Fetch {
     }
     
     /// Metodo PUT
-    static func put<T: Decodable>(
+    static func put<T: Decodable & Sendable>(
         endpoint: String,
         body: Encodable,
         queryParams: [URLQueryItem]? = nil,
@@ -99,7 +109,7 @@ class Fetch {
     }
     
     /// Metodo DELETE
-    static func delete<T: Decodable>(
+    static func delete<T: Decodable & Sendable>(
         endpoint: String,
         queryParams: [URLQueryItem]? = nil,
         headers: [String: String] = [:],
@@ -123,9 +133,9 @@ class Fetch {
     }
     
     /// Funzione per gestire la decodifica della risposta
-    private static func handleResponse<T: Decodable>(data: Data, completion: @escaping (Result<T, Error>) -> Void) {
+    private static func handleResponse<T: Decodable & Sendable>(data: Data, completion: @escaping (Result<T, Error>) -> Void) {
         if let jsonString = String(data: data, encoding: .utf8) {
-            //log("📩 Body ricevuto: \(jsonString)")
+            log("📩 Body ricevuto: \(jsonString)")
         }
         
         do {
@@ -144,3 +154,4 @@ class Fetch {
         }
     }
 }
+

@@ -11,6 +11,10 @@ struct AnimalView: View {
     @ObservedObject var viewModel: AnimalViewModel
     @State private var selectedSection = 0
     
+    init(animal: Animal) {
+        self.viewModel = AnimalViewModel(animal: animal)
+    }
+    
     var body: some View {
             
         NavigationStack{
@@ -47,8 +51,8 @@ struct AnimalView: View {
                             .padding(.horizontal, 20)
             }
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {  // Pulsante a destra
-                    EditButton()
+                ToolbarItem(placement: .automatic) {  // Pulsante a destra
+                    Button("Edit") { /* Add edit action here */ }
                 }
             }
         }
@@ -58,7 +62,6 @@ struct AnimalView: View {
 
 #Preview {
     let animal: Animal = .init(idAnimale: 1, nome: "Animalo", immagine: "default.png")
-    let viewModel: AnimalViewModel = .init(animal: animal)
     
-   AnimalView(viewModel: viewModel)
+   AnimalView(animal: animal)
 }

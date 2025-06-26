@@ -12,27 +12,21 @@ struct TabNavView: View {
     
     var body: some View {
         TabView(selection: $selectedTab) {
-            Tab("MyPet", systemImage: "pawprint.fill", value: 3){
-                MyPetView()
-            }
-            
-            Tab("MyVet", systemImage: "stethoscope", value: 1){
-                MyVetView()
-            }
-            
             Tab("Home", systemImage: "house.fill", value: 0){
                 HomeView()
             }
-            
-            Tab("PetCare", systemImage: "scissors", value: 2){
-                PetCareView()
+            Tab("MyPet", systemImage: "pawprint.fill", value: 1){
+                MyPetView()
             }
             
-            Tab("PetShop", systemImage: "cart.fill", value: 4){
-                PetShopView()
+            Tab("MyVet", systemImage: "stethoscope", value: 2){
+                MyVetView()
+            }
+            
+            Tab("Search", systemImage: "magnifyingglass", value: 3, role: .search){
+                SearchView()
             }
         }
-        .accentColor(.orange)
         .tabViewStyle(.tabBarOnly)
     }
 }
