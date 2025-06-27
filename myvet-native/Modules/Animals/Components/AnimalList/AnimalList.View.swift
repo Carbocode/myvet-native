@@ -16,7 +16,7 @@ struct AnimalListView: View {
             // Sidebar: Elenco degli animali
             List(viewModel.animals, id: \.id) { animal in
                 NavigationLink(destination: AnimalView(animal: animal)) {
-                    AnimalCardView(animal: animal)
+                    AnimalProfileCardView(animal: animal)
                 }
             }
             .navigationTitle("I miei animali")

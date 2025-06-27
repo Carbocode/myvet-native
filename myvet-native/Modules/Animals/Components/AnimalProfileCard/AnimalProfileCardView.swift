@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct AnimalCardView: View {
-    @ObservedObject var viewModel: AnimalCardViewModel
+struct AnimalProfileCardView: View {
+    @ObservedObject var viewModel: AnimalProfileCardViewModel
     
     init(animal: Animal){
         self.viewModel = .init(animal: animal)
