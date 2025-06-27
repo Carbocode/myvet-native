@@ -8,7 +8,7 @@
 import Foundation
 
 // Modello per l'animale basato sulla struttura del database
-struct Animal: Identifiable, Hashable, Decodable {
+struct Animal: Identifiable, Hashable, Codable, Equatable {
     var idAnimale: Int
     var nome: String
     var dataNascita: String?
@@ -17,14 +17,21 @@ struct Animal: Identifiable, Hashable, Decodable {
     var idTaglia: Int?
     var nomeTaglia: String?
     var peso: Double?
+    var sterilizzato: Bool?
+    var assicurato: Bool?
     var immagine: String?
     var microchip: String?
     var passaporto: String?
+    var idSpecie: Int?
     var idRazza: Int?
-    var nomeRazza: String?
     var nomeSpecie: String?
+    var nomeRazza: String?
+    var idAttivita: Int?
+    var idCorporatura: Int?
+    var nomeAttivita: String?
+    var nomeCorporatura: String?
     var mantello: String?
     var descrizione: String?
     
-    var id: Int { idAnimale }
+    var id: Int? { idAnimale }
 }
