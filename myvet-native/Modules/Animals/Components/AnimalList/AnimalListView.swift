@@ -8,22 +8,22 @@
 import SwiftUI
 
 struct AnimalListView: View {
-    @ObservedObject var viewModel = AnimalListViewModel()
-    @State var selectedAnimal: Animal? = nil
+    @StateObject var viewModel = AnimalListViewModel()
 
     var body: some View {
-        
-            // Sidebar: Elenco degli animali
-            List(viewModel.animals, id: \.id) { animal in
-                NavigationLink(destination: AnimalView(animal: animal)) {
-                    AnimalProfileCardView(animal: animal)
-                }
+        // Sidebar: Elenco degli animali
+        List(viewModel.animals, id: \.id) { animal in
+            NavigationLink(destination: AnimalView(animal: animal)) {
+                AnimalProfileCardView(animal: animal)
             }
-            .navigationTitle("I miei animali")
-            .listStyle(.plain)
+        }
+        .navigationTitle("I miei animali")
     }
 }
 
 #Preview {
-    AnimalListView(selectedAnimal: nil)
+    // La lista, poter essere interagibile, deve almeno essere dentro una NavigationStack. Di base lo è già alla base della navigazione, ma per far funzionare la preview lo mettiamo anche qui
+    NavigationStack{
+        AnimalListView()
+    }
 }

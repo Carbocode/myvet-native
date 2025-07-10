@@ -8,11 +8,27 @@
 import SwiftUI
 
 struct AnimalCarouselView: View {
+    @StateObject var viewModel = AnimalCarouselViewModel()
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack() {
+                    ForEach(viewModel.animals, id: \.id) { animal in
+                        NavigationLink(destination: AnimalView(animal: animal)) {
+                            AnimalProfileCardView(animal: animal, isVertical: true)
+                        }
+                    }
+                }
+            }
+            .frame(height: 150)
+        }
+        .navigationTitle("I miei animali")
     }
 }
 
 #Preview {
-    AnimalCarouselView()
+    NavigationStack {
+        AnimalCarouselView()
+    }
 }

@@ -8,8 +8,8 @@
 import Foundation
 
 class RacesActions {
-    static func animals(idSpecie: Int, completion: @escaping (Result<[Race], Error>) -> Void) {
-        Fetch.get(endpoint: "/animals/bcs/read?IDSpecie=\(idSpecie)", headers: ["Authorization": AuthManager.shared.getToken() ?? ""]) { (result: Result<[Race], Error>) in
+    static func read(idSpecie: Int, completion: @escaping (Result<[Race], Error>) -> Void) {
+        Fetch.get(endpoint: "/animals/races/read", queryParams: [URLQueryItem(name: "IDSpecie", value: String(idSpecie))], headers: ["Authorization": AuthManager.shared.getToken() ?? ""]) { (result: Result<[Race], Error>) in
             switch result {
                 case .success(let response):
                     completion(.success(response))

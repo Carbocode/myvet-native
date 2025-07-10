@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct CreateAnimalResponse: Decodable {
+struct AnimalCreateResponse: Decodable {
     let idAnimale: Int
 }

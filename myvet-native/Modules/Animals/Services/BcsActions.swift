@@ -8,8 +8,8 @@
 import Foundation
 
 class BcsActions {
-    static func animals(completion: @escaping (Result<[Bcs], Error>) -> Void) {
-        Fetch.get(endpoint: "/animals/bcs/read-all", headers: ["Authorization": AuthManager.shared.getToken() ?? ""]) { (result: Result<[Bcs], Error>) in
+    static func read(completion: @escaping (Result<[Bcs], Error>) -> Void) {
+        Fetch.get(endpoint: "/animals/bcs/read", headers: ["Authorization": AuthManager.shared.getToken() ?? ""]) { (result: Result<[Bcs], Error>) in
             switch result {
                 case .success(let response):
                     completion(.success(response))

@@ -8,25 +8,28 @@
 import SwiftUI
 
 struct HomeView: View {
-    var onLogout: (() -> Void)? = nil
     
     var body: some View {
         VStack(spacing: 16) {
-            ProfilePicturePicker()
+            AnimalCarouselView()
         }
-        .toolbar {
+        .toolbar {            
             ToolbarItem(placement: .automatic) {
                 Button {
-                    onLogout?()
+                    AuthManager.shared.removeToken()
                 } label: {
                     Label("Logout", systemImage: "rectangle.portrait.and.arrow.right")
                 }
+                .buttonStyle(.borderedProminent)
+                .tint(.red)
             }
         }
+#if os(iOS)
+        .navigationBarTitleDisplayMode(.inline)
+#endif
     }
 }
 
-#Preview {    NavigationStack {
-        HomeView(onLogout: { print("Logout tapped") })
-    }
+#Preview {
+    HomeView()
 }

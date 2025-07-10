@@ -7,9 +7,9 @@
 
 import Foundation
 
-class ActivityActions {
-    static func read(completion: @escaping (Result<[Bcs], Error>) -> Void) {
-        Fetch.get(endpoint: "/animals/activity/read", headers: ["Authorization": AuthManager.shared.getToken() ?? ""]) { (result: Result<[ActivityLevels], Error>) in
+class ActivityLevelsActions {
+    static func read(completion: @escaping (Result<[ActivityLevel], Error>) -> Void) {
+        Fetch.get(endpoint: "/animals/activity-level/read", headers: ["Authorization": AuthManager.shared.getToken() ?? ""]) { (result: Result<[ActivityLevel], Error>) in
             switch result {
                 case .success(let response):
                     completion(.success(response))

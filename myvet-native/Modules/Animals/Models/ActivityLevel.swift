@@ -6,12 +6,12 @@
 //
 
 
-struct Bcs: Identifiable, Hashable, Codable, Equatable {
-    let idCorporatura: Int
+struct ActivityLevel: Identifiable, Hashable, Codable, Equatable {
+    let idAttivita: Int
     let nome: String
     let descrizione: String?
     let immagine: String?
     let moltiplicatore: Double?
     
-    var id: Int { idCorporatura }
+    var id: Int { idAttivita }
 }

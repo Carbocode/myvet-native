@@ -56,8 +56,9 @@ typealias PlatformImage = NSImage
 #endif
 
 struct ProfilePicturePicker: View {
+    @Binding var selectedImage: PlatformImage?
+    
     @State private var showMenu = false
-    @State private var selectedImage: PlatformImage? = nil
     @State private var showPhotoPicker = false
     @State private var showCamera = false
     @State private var photoPickerItem: PhotosPickerItem? = nil
@@ -72,14 +73,14 @@ struct ProfilePicturePicker: View {
                 Image(uiImage: image)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(width: 120, height: 120)
+                    .frame(width: 100, height: 100)
                     .clipShape(Circle())
                     .shadow(radius: 5)
                 #elseif os(macOS)
                 Image(nsImage: image)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(width: 120, height: 120)
+                    .frame(width: 100, height: 100)
                     .clipShape(Circle())
                     .shadow(radius: 5)
                 #endif
@@ -87,9 +88,10 @@ struct ProfilePicturePicker: View {
                 Image(systemName: "person.circle")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(width: 120, height: 120)
+                    .frame(width: 100, height: 100)
                     .foregroundColor(.gray)
             }
+            
             Menu {
                 Button {
                     showPhotoPicker = true
@@ -112,10 +114,8 @@ struct ProfilePicturePicker: View {
                 #endif
             } label: {
                 Button("Change") {}
-                .font(.headline)
-                .padding(.horizontal, 32)
-                .padding(.vertical, 12)
-                .background(Capsule().stroke(Color.accentColor, lineWidth: 2))
+                    .tint(.blue)
+                    .buttonStyle(.bordered)
             }
         }
         .padding()
@@ -168,5 +168,7 @@ struct ProfilePicturePicker: View {
 }
 
 #Preview {
-    ProfilePicturePicker()
+    @Previewable @State var selectedImage: PlatformImage? = nil
+    ProfilePicturePicker(selectedImage: $selectedImage)
 }
+

@@ -11,7 +11,7 @@ class AnimalListViewModel: ObservableObject {
     @Published var animals: [Animal] = []
     
     init() {
-        AnimalsActions.animals() { result in
+        AnimalsActions.readAll() { result in
             switch result {
                 case .success(let result):
                 self.animals = result

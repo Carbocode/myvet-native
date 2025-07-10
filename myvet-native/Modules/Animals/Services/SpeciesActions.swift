@@ -8,7 +8,7 @@
 import Foundation
 
 class SpeciesActions {
-    static func animals(completion: @escaping (Result<[Species], Error>) -> Void) {
+    static func read(completion: @escaping (Result<[Species], Error>) -> Void) {
         Fetch.get(endpoint: "/animals/species/read", headers: ["Authorization": AuthManager.shared.getToken() ?? ""]) { (result: Result<[Species], Error>) in
             switch result {
                 case .success(let response):

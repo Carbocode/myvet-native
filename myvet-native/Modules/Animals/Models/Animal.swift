@@ -17,8 +17,8 @@ struct Animal: Identifiable, Hashable, Codable, Equatable {
     var idTaglia: Int?
     var nomeTaglia: String?
     var peso: Double?
-    var sterilizzato: Bool?
-    var assicurato: Bool?
+    var sterilizzato: Int?
+    var assicurato: Int?
     var immagine: String?
     var microchip: String?
     var passaporto: String?
@@ -34,4 +34,30 @@ struct Animal: Identifiable, Hashable, Codable, Equatable {
     var descrizione: String?
     
     var id: Int? { idAnimale }
+    
+    static let example = Animal(
+        idAnimale: 1,
+        nome: "Fido",
+        dataNascita: "2020-01-01",
+        luogoNascita: "Roma",
+        sesso: "M",
+        idTaglia: 2,
+        nomeTaglia: "Media",
+        peso: 14.5,
+        sterilizzato: 1,
+        assicurato: 0,
+        immagine: "default.png",
+        microchip: "123456789012345",
+        passaporto: "IT123456",
+        idSpecie: 1,
+        idRazza: 4,
+        nomeSpecie: "Cane",
+        nomeRazza: "Labrador",
+        idAttivita: 1,
+        idCorporatura: 3,
+        nomeAttivita: "Compagnia",
+        nomeCorporatura: "Robusta",
+        mantello: "Marrone",
+        descrizione: "Cane molto socievole e giocherellone."
+    )
 }
