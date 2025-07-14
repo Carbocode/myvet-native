@@ -15,7 +15,7 @@ struct ContentView: View {
                 if authManager.isAuthenticated {
                     TabNavView()
                 } else {
-                    LoginView()
+                    LandingView()
                 }
             }
         }

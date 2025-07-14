@@ -60,9 +60,7 @@ class AnimalFormViewModel: ObservableObject {
             Descrizione: descrizione,
         )
         AnimalsActions.create(animalRequest, image: selectedImage) { result in
-            DispatchQueue.main.async {
-                completion(result)
-            }
+            completion(result)
         }
     }
     

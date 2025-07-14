@@ -7,19 +7,6 @@
 
 import SwiftUI
 
-struct RowView: View {
-    var title: String
-    var value: String
-    
-    var body: some View {
-        HStack {
-            Text(title).fontWeight(.semibold)
-            Spacer()
-            Text(value).foregroundStyle(.secondary)
-        }
-    }
-}
-
 struct AnimalDetailsView: View {
     @StateObject var viewModel: AnimalDetailsViewModel
     
@@ -29,18 +16,18 @@ struct AnimalDetailsView: View {
     
     var body: some View {
         Form {
-            RowView(title: "Nome", value: viewModel.animal.nome)
-            RowView(title: "Specie", value: viewModel.animal.nomeSpecie ?? "-")
-            RowView(title: "Razza", value: viewModel.animal.nomeRazza ?? "-")
-            RowView(title: "Data di nascita", value: viewModel.animal.dataNascita ?? "-")
-            RowView(title: "Luogo di nascita", value: viewModel.animal.luogoNascita ?? "-")
-            RowView(title: "Sesso", value: viewModel.animal.sesso ?? "-")
-            RowView(title: "Taglia", value: viewModel.animal.nomeTaglia ?? "-")
-            RowView(title: "Peso", value: viewModel.animal.peso != nil ? "\(viewModel.animal.peso!) kg" : "-")
-            RowView(title: "Numero Microchip", value: viewModel.animal.microchip ?? "-")
-            RowView(title: "Numero Passaporto", value: viewModel.animal.passaporto ?? "-")
-            RowView(title: "Mantello", value: viewModel.animal.mantello ?? "-")
-            RowView(title: "Descrizione", value: viewModel.animal.descrizione ?? "-")
+            ListRowView(title: "Nome", value: viewModel.animal.nome)
+            ListRowView(title: "Specie", value: viewModel.animal.nomeSpecie ?? "-")
+            ListRowView(title: "Razza", value: viewModel.animal.nomeRazza ?? "-")
+            ListRowView(title: "Data di nascita", value: viewModel.animal.dataNascita ?? "-")
+            ListRowView(title: "Luogo di nascita", value: viewModel.animal.luogoNascita ?? "-")
+            ListRowView(title: "Sesso", value: viewModel.animal.sesso ?? "-")
+            ListRowView(title: "Taglia", value: viewModel.animal.nomeTaglia ?? "-")
+            ListRowView(title: "Peso", value: viewModel.animal.peso != nil ? "\(viewModel.animal.peso!) kg" : "-")
+            ListRowView(title: "Numero Microchip", value: viewModel.animal.microchip ?? "-")
+            ListRowView(title: "Numero Passaporto", value: viewModel.animal.passaporto ?? "-")
+            ListRowView(title: "Mantello", value: viewModel.animal.mantello ?? "-")
+            ListRowView(title: "Descrizione", value: viewModel.animal.descrizione ?? "-")
         }
         .formStyle(.grouped)
     }

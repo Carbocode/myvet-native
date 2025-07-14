@@ -23,7 +23,6 @@ struct AnimalCarouselView: View {
             }
             .frame(height: 150)
         }
-        .navigationTitle("I miei animali")
     }
 }
 

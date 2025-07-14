@@ -17,7 +17,6 @@ struct AnimalListView: View {
                 AnimalProfileCardView(animal: animal)
             }
         }
-        .navigationTitle("I miei animali")
     }
 }
 
