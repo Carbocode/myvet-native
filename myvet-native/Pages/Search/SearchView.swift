@@ -6,10 +6,20 @@
 //
 
 import SwiftUI
+import MapKit
+import CoreLocation
 
 struct SearchView: View {
+    @State private var cameraPosition = MapCameraPosition.userLocation(fallback: .automatic)
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Map{
+            UserAnnotation()
+        }
+        .mapControls {
+            MapUserLocationButton()
+            MapCompass()
+        }
     }
 }
 
