@@ -8,13 +8,16 @@
 import Foundation
 
 struct User: Identifiable, Hashable, Codable, Equatable {
-    let idUtente: Int
+    let idAccount: Int
+    var idTipologia: Int
     var nome: String
     var cognome: String
     var email: String
+    var password: String
     var telefono: String?
     var codiceFiscale: String?
+    var immagine: String?
     
-    var id: Int { idUtente }
+    var id: Int { idAccount }
 }
 

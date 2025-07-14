@@ -13,20 +13,6 @@ struct HomeView: View {
         VStack(spacing: 16) {
             AnimalCarouselView()
         }
-        .toolbar {            
-            ToolbarItem(placement: .automatic) {
-                Button {
-                    AuthManager.shared.removeToken()
-                } label: {
-                    Label("Logout", systemImage: "rectangle.portrait.and.arrow.right")
-                }
-                .buttonStyle(.borderedProminent)
-                .tint(.red)
-            }
-        }
-#if os(iOS)
-        .navigationBarTitleDisplayMode(.inline)
-#endif
     }
 }
 

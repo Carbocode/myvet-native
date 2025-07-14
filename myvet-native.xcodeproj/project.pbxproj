@@ -18,6 +18,10 @@
 		663133292E0DC243008F368F /* MyPetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663133282E0DC243008F368F /* MyPetView.swift */; };
 		6659E0012E0DD7E000E807CB /* PhotosUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6659E0002E0DD7E000E807CB /* PhotosUI.framework */; };
 		6678843C2D75CE4A00033CE3 /* Fetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6678843B2D75CE4A00033CE3 /* Fetch.swift */; };
+		66E1867C2E202482001036FC /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66E1867B2E202482001036FC /* AuthenticationServices.framework */; };
+		66E1868C2E20352E001036FC /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 66E1868B2E20352E001036FC /* FirebaseMessaging */; };
+		66E1868E2E2072EB001036FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E1868D2E2072E3001036FC /* AppDelegate.swift */; };
+		66E186902E207755001036FC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 66E1868F2E207755001036FC /* GoogleService-Info.plist */; };
 		66E32B502E060BDF006603E8 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66E32B4E2E060BDA006603E8 /* MapKit.framework */; };
 		66F5EFB12CAE72AA00BA9DC8 /* environments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F5EFB02CAE72AA00BA9DC8 /* environments.swift */; };
 /* End PBXBuildFile section */
@@ -35,6 +39,11 @@
 		663133282E0DC243008F368F /* MyPetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPetView.swift; sourceTree = "<group>"; };
 		6659E0002E0DD7E000E807CB /* PhotosUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PhotosUI.framework; path = System/Library/Frameworks/PhotosUI.framework; sourceTree = SDKROOT; };
 		6678843B2D75CE4A00033CE3 /* Fetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fetch.swift; sourceTree = "<group>"; };
+		66E1867B2E202482001036FC /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
+		66E1867D2E20248B001036FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		66E1867E2E202CB4001036FC /* myvet-native.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "myvet-native.entitlements"; sourceTree = "<group>"; };
+		66E1868D2E2072E3001036FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		66E1868F2E207755001036FC /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		66E32B4E2E060BDA006603E8 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		66F5EFB02CAE72AA00BA9DC8 /* environments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = environments.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -47,6 +56,8 @@
 		6659DFFB2E0DD5BB00E807CB /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
 		666476CE2CB019FF0087F1A1 /* Animal */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Animal; sourceTree = "<group>"; };
 		667884382D75CAD100033CE3 /* Models */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Models; sourceTree = "<group>"; };
+		66E1866F2E201DD3001036FC /* User */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = User; sourceTree = "<group>"; };
+		66E186762E2023CC001036FC /* Landing */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Landing; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +65,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66E1868C2E20352E001036FC /* FirebaseMessaging in Frameworks */,
+				66E1867C2E202482001036FC /* AuthenticationServices.framework in Frameworks */,
 				66E32B502E060BDF006603E8 /* MapKit.framework in Frameworks */,
 				6659E0012E0DD7E000E807CB /* PhotosUI.framework in Frameworks */,
 			);
@@ -82,6 +95,10 @@
 		6615FFD92CAD883E00E03734 /* myvet-native */ = {
 			isa = PBXGroup;
 			children = (
+				66E1868F2E207755001036FC /* GoogleService-Info.plist */,
+				66E1868D2E2072E3001036FC /* AppDelegate.swift */,
+				66E1867E2E202CB4001036FC /* myvet-native.entitlements */,
+				66E1867D2E20248B001036FC /* Info.plist */,
 				6620475A2CADB42B00A2DD0B /* TabNav */,
 				66269FA52D79A746009287FF /* Modules */,
 				662047582CADB35400A2DD0B /* Core */,
@@ -106,6 +123,8 @@
 		662047572CADB32B00A2DD0B /* Pages */ = {
 			isa = PBXGroup;
 			children = (
+				66E186762E2023CC001036FC /* Landing */,
+				66E1866F2E201DD3001036FC /* User */,
 				6631332A2E0DC258008F368F /* Search */,
 				6621223B2CB14301001530C4 /* Login */,
 				662047612CADB67C00A2DD0B /* MyPet */,
@@ -170,6 +189,7 @@
 		66E32B4D2E060BD9006603E8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				66E1867B2E202482001036FC /* AuthenticationServices.framework */,
 				6659E0002E0DD7E000E807CB /* PhotosUI.framework */,
 				663133242E0DC0B6008F368F /* MyVet.icon */,
 				66E32B4E2E060BDA006603E8 /* MapKit.framework */,
@@ -208,6 +228,8 @@
 				6659DFFB2E0DD5BB00E807CB /* Components */,
 				666476CE2CB019FF0087F1A1 /* Animal */,
 				667884382D75CAD100033CE3 /* Models */,
+				66E1866F2E201DD3001036FC /* User */,
+				66E186762E2023CC001036FC /* Landing */,
 			);
 			name = "myvet-native";
 			productName = "myvet-native";
@@ -238,6 +260,9 @@
 				Base,
 			);
 			mainGroup = 6615FFCE2CAD883E00E03734;
+			packageReferences = (
+				66E1868A2E20352E001036FC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 6615FFD82CAD883E00E03734 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -253,6 +278,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				663133252E0DC0B6008F368F /* MyVet.icon in Resources */,
+				66E186902E207755001036FC /* GoogleService-Info.plist in Resources */,
 				6615FFE22CAD884000E03734 /* Preview Assets.xcassets in Resources */,
 				6615FFDF2CAD884000E03734 /* Assets.xcassets in Resources */,
 			);
@@ -265,6 +291,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66E1868E2E2072EB001036FC /* AppDelegate.swift in Sources */,
 				66F5EFB12CAE72AA00BA9DC8 /* environments.swift in Sources */,
 				6620475C2CADB44400A2DD0B /* TabNavView.swift in Sources */,
 				6620476C2CADB6E100A2DD0B /* MyVetView.swift in Sources */,
@@ -414,10 +441,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				AUTOMATION_APPLE_EVENTS = NO;
+				CODE_SIGN_ENTITLEMENTS = "myvet-native/myvet-native.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"myvet-native/Preview Content\"";
+				DEVELOPMENT_TEAM = 52D98QT44V;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_INCOMING_NETWORK_CONNECTIONS = NO;
@@ -425,17 +455,20 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
 				ENABLE_RESOURCE_ACCESS_BLUETOOTH = NO;
-				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = YES;
 				ENABLE_RESOURCE_ACCESS_CAMERA = YES;
 				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
 				ENABLE_RESOURCE_ACCESS_LOCATION = YES;
-				ENABLE_RESOURCE_ACCESS_PHOTO_LIBRARY = NO;
+				ENABLE_RESOURCE_ACCESS_PHOTO_LIBRARY = YES;
 				ENABLE_RESOURCE_ACCESS_PRINTING = NO;
 				ENABLE_RESOURCE_ACCESS_USB = NO;
 				ENABLE_USER_SELECTED_FILES = readwrite;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "myvet-native/Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Take a photo for you or your animal profile picture";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Find people around you";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Choose a photo for you or your animal profile picture";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -477,10 +510,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				AUTOMATION_APPLE_EVENTS = NO;
+				CODE_SIGN_ENTITLEMENTS = "myvet-native/myvet-native.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"myvet-native/Preview Content\"";
+				DEVELOPMENT_TEAM = 52D98QT44V;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_INCOMING_NETWORK_CONNECTIONS = NO;
@@ -488,17 +524,20 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
 				ENABLE_RESOURCE_ACCESS_BLUETOOTH = NO;
-				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = YES;
 				ENABLE_RESOURCE_ACCESS_CAMERA = YES;
 				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
 				ENABLE_RESOURCE_ACCESS_LOCATION = YES;
-				ENABLE_RESOURCE_ACCESS_PHOTO_LIBRARY = NO;
+				ENABLE_RESOURCE_ACCESS_PHOTO_LIBRARY = YES;
 				ENABLE_RESOURCE_ACCESS_PRINTING = NO;
 				ENABLE_RESOURCE_ACCESS_USB = NO;
 				ENABLE_USER_SELECTED_FILES = readwrite;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "myvet-native/Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Take a photo for you or your animal profile picture";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Find people around you";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Choose a photo for you or your animal profile picture";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -555,6 +594,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		66E1868A2E20352E001036FC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.15.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		66E1868B2E20352E001036FC /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 66E1868A2E20352E001036FC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 6615FFCF2CAD883E00E03734 /* Project object */;
 }
