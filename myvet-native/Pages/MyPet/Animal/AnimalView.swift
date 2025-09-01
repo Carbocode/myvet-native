@@ -18,13 +18,9 @@ struct AnimalView: View {
     
     var body: some View {
         NavigationStack{
-            #if os(MacOS)
             ScrollView{
                 form
             }
-            #else
-            form
-            #endif
         }
         .toolbar {
             #if os(iOS)
@@ -48,6 +44,7 @@ struct AnimalView: View {
                 .labelsHidden()
             }
         }
+        .ignoresSafeArea(edges: .top)
     }
     
     var form: some View {
@@ -83,7 +80,6 @@ struct AnimalView: View {
                 AnimalDetailsView(animal: viewModel.animal)
             }
         }
-        .ignoresSafeArea(edges: .top)
     }
     
 }

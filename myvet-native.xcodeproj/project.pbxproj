@@ -16,12 +16,12 @@
 		663133252E0DC0B6008F368F /* MyVet.icon in Resources */ = {isa = PBXBuildFile; fileRef = 663133242E0DC0B6008F368F /* MyVet.icon */; };
 		663133292E0DC243008F368F /* MyPetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663133282E0DC243008F368F /* MyPetView.swift */; };
 		6659E0012E0DD7E000E807CB /* PhotosUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6659E0002E0DD7E000E807CB /* PhotosUI.framework */; };
+		666B3A5E2E65C170005EEAD4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 666B3A5D2E65C170005EEAD4 /* GoogleService-Info.plist */; };
+		666B3B302E65F017005EEAD4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66E32B4E2E060BDA006603E8 /* MapKit.framework */; };
 		6678843C2D75CE4A00033CE3 /* Fetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6678843B2D75CE4A00033CE3 /* Fetch.swift */; };
 		66E1867C2E202482001036FC /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66E1867B2E202482001036FC /* AuthenticationServices.framework */; };
 		66E1868C2E20352E001036FC /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 66E1868B2E20352E001036FC /* FirebaseMessaging */; };
 		66E1868E2E2072EB001036FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E1868D2E2072E3001036FC /* AppDelegate.swift */; };
-		66E186902E207755001036FC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 66E1868F2E207755001036FC /* GoogleService-Info.plist */; };
-		66E32B502E060BDF006603E8 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66E32B4E2E060BDA006603E8 /* MapKit.framework */; };
 		66F5EFB12CAE72AA00BA9DC8 /* environments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F5EFB02CAE72AA00BA9DC8 /* environments.swift */; };
 		66FE51982E24E9AC005899F8 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 66FE51972E24E9AC005899F8 /* FirebaseMessaging */; };
 		66FE519A2E24EBA8005899F8 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 66FE51992E24EBA8005899F8 /* FirebaseMessaging */; };
@@ -38,12 +38,12 @@
 		663133242E0DC0B6008F368F /* MyVet.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = MyVet.icon; sourceTree = "<group>"; };
 		663133282E0DC243008F368F /* MyPetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPetView.swift; sourceTree = "<group>"; };
 		6659E0002E0DD7E000E807CB /* PhotosUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PhotosUI.framework; path = System/Library/Frameworks/PhotosUI.framework; sourceTree = SDKROOT; };
+		666B3A5D2E65C170005EEAD4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6678843B2D75CE4A00033CE3 /* Fetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fetch.swift; sourceTree = "<group>"; };
 		66E1867B2E202482001036FC /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
 		66E1867D2E20248B001036FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		66E1867E2E202CB4001036FC /* myvet-native.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "myvet-native.entitlements"; sourceTree = "<group>"; };
 		66E1868D2E2072E3001036FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		66E1868F2E207755001036FC /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		66E32B4E2E060BDA006603E8 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		66F5EFB02CAE72AA00BA9DC8 /* environments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = environments.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -55,6 +55,7 @@
 		6631332A2E0DC258008F368F /* Search */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Search; sourceTree = "<group>"; };
 		6659DFFB2E0DD5BB00E807CB /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
 		666476CE2CB019FF0087F1A1 /* Animal */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Animal; sourceTree = "<group>"; };
+		666B3A582E65BFAF005EEAD4 /* Models */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Models; sourceTree = "<group>"; };
 		667884382D75CAD100033CE3 /* Models */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Models; sourceTree = "<group>"; };
 		66E1866F2E201DD3001036FC /* User */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = User; sourceTree = "<group>"; };
 		66E186762E2023CC001036FC /* Landing */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Landing; sourceTree = "<group>"; };
@@ -69,7 +70,7 @@
 				66E1868C2E20352E001036FC /* FirebaseMessaging in Frameworks */,
 				66E1867C2E202482001036FC /* AuthenticationServices.framework in Frameworks */,
 				66FE51982E24E9AC005899F8 /* FirebaseMessaging in Frameworks */,
-				66E32B502E060BDF006603E8 /* MapKit.framework in Frameworks */,
+				666B3B302E65F017005EEAD4 /* MapKit.framework in Frameworks */,
 				6659E0012E0DD7E000E807CB /* PhotosUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -97,7 +98,6 @@
 		6615FFD92CAD883E00E03734 /* myvet-native */ = {
 			isa = PBXGroup;
 			children = (
-				66E1868F2E207755001036FC /* GoogleService-Info.plist */,
 				66E1868D2E2072E3001036FC /* AppDelegate.swift */,
 				66E1867E2E202CB4001036FC /* myvet-native.entitlements */,
 				66E1867D2E20248B001036FC /* Info.plist */,
@@ -110,6 +110,7 @@
 				6615FFDC2CAD883E00E03734 /* ContentView.swift */,
 				6615FFDE2CAD884000E03734 /* Assets.xcassets */,
 				6615FFE02CAD884000E03734 /* Preview Content */,
+				666B3A5D2E65C170005EEAD4 /* GoogleService-Info.plist */,
 			);
 			path = "myvet-native";
 			sourceTree = "<group>";
@@ -137,6 +138,7 @@
 		662047582CADB35400A2DD0B /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				666B3A582E65BFAF005EEAD4 /* Models */,
 				66269FB12D79A882009287FF /* Services */,
 				66F5EFB02CAE72AA00BA9DC8 /* environments.swift */,
 			);
@@ -220,6 +222,7 @@
 				6631332A2E0DC258008F368F /* Search */,
 				6659DFFB2E0DD5BB00E807CB /* Components */,
 				666476CE2CB019FF0087F1A1 /* Animal */,
+				666B3A582E65BFAF005EEAD4 /* Models */,
 				667884382D75CAD100033CE3 /* Models */,
 				66E1866F2E201DD3001036FC /* User */,
 				66E186762E2023CC001036FC /* Landing */,
@@ -271,7 +274,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				663133252E0DC0B6008F368F /* MyVet.icon in Resources */,
-				66E186902E207755001036FC /* GoogleService-Info.plist in Resources */,
+				666B3A5E2E65C170005EEAD4 /* GoogleService-Info.plist in Resources */,
 				6615FFE22CAD884000E03734 /* Preview Assets.xcassets in Resources */,
 				6615FFDF2CAD884000E03734 /* Assets.xcassets in Resources */,
 			);
@@ -459,14 +462,14 @@
 				INFOPLIST_FILE = "myvet-native/Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Take a photo for you or your animal profile picture";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Find people around you";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Find Vets in the search tab";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Choose a photo for you or your animal profile picture";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIStatusBarHidden = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -528,14 +531,14 @@
 				INFOPLIST_FILE = "myvet-native/Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Take a photo for you or your animal profile picture";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Find people around you";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Find Vets in the search tab";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Choose a photo for you or your animal profile picture";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIStatusBarHidden = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

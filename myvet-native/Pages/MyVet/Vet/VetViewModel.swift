@@ -16,6 +16,18 @@ class VetViewModel {
         self.vet = vet
     }
     
+    /// Carica i dettagli completi del veterinario e aggiorna la property `vet`
+    func loadDetail() async {
+        isLoading = true
+        do {
+            let detailedVet = try await VetsActions.read(idVeterinario: vet.idVeterinario)
+            self.vet = detailedVet
+        } catch {
+            print("Errore durante il caricamento dettagli vet: \(error)")
+        }
+        isLoading = false
+    }
+    
     func toggleFavorite() async {
         isLoading = true
         do {
@@ -28,4 +40,3 @@ class VetViewModel {
         isLoading = false
     }
 }
-

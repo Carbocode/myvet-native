@@ -31,7 +31,9 @@ struct HomeView: View {
             }
         }
         .sheet(isPresented: $showProfileSheet) {
-            UserView()
+            NavigationStack{
+                UserView()
+            }
         }
 #endif
     }

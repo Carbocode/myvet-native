@@ -23,6 +23,14 @@ struct Vet: Identifiable, Decodable, Equatable, Hashable {
     var descrizione: String?
     var struttura: String?
     var idStruttura: Int?
+    var numeroIscrizione: String?
+    var partitaIVA: String?
+    var ordineProvinciale: String?
+    var idSpecializzazione: Int?
+    var idDisponibilita: Int?
+    var nomeDisponibilita: String?
+    var nomeTipoStruttura: String?
+    var idAccount: Int?
         
     struct Coordinate: Decodable, Hashable {
         let lat: Double

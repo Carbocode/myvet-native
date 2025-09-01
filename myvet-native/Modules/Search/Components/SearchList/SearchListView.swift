@@ -32,7 +32,6 @@ struct SearchListView: View {
     }
 
     var body: some View {
-        NavigationStack {
             List {
                 if viewModel.isLoading {
                     ProgressView()
@@ -64,7 +63,9 @@ struct SearchListView: View {
             }
 #if os(iOS)
             .sheet(item: $selectedVet) { vet in
-                VetView(vet: vet)
+                NavigationStack{
+                    VetView(vet: vet)
+                }
             }
 #elseif os(macOS)
             .popover(item: $selectedVet, arrowEdge: .trailing) { vet in
@@ -72,7 +73,6 @@ struct SearchListView: View {
                     .frame(width: 400, height: 550)
             }
 #endif
-        }
     }
 }
 

@@ -17,6 +17,8 @@ struct SearchView: View {
     
     @State private var inspectorPresented = true
     
+    let locationManager = CLLocationManager()
+    
     var body: some View {
 #if os(macOS)
         map
@@ -24,7 +26,9 @@ struct SearchView: View {
             search
         }
         .sheet(item: $selectedVet) { vet in
-            VetView(vet: vet)
+            NavigationStack{
+                VetView(vet: vet)
+            }
         }
 #else
         map
@@ -33,6 +37,15 @@ struct SearchView: View {
             .presentationDetents([.fraction(0.35), .medium, .large])
             .interactiveDismissDisabled(true)
             .presentationBackgroundInteraction(.enabled)
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    showSheet.toggle()
+                } label: {
+                    Label("Home", systemImage: "house.fill")
+                }
+            }
         }
 #endif
     }
@@ -50,19 +63,27 @@ struct SearchView: View {
                 }
             }
         }
+        .onAppear{
+            locationManager.requestWhenInUseAuthorization()
+        }
         .mapControls {
             MapUserLocationButton()
             MapCompass()
         }
         .sheet(item: $selectedVet) { vet in
-            VetView(vet: vet)
+            NavigationStack{
+                VetView(vet: vet)
+            }
         }
     }
     
     var search: some View{
-        return SearchListView(position: cameraPosition.camera?.centerCoordinate) { results in
-            lastResults = results
+        NavigationStack{
+            SearchListView(position: cameraPosition.camera?.centerCoordinate) { results in
+                lastResults = results
+            }
         }
+        
     }
 }
 

@@ -33,10 +33,55 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         return true
     }
     
+    // MARK: - FCM Token Helpers
+
+    /// Chiama questo dopo login per rigenerare e inviare il token
+    static func generateAndSendFCMToken() {
+        Messaging.messaging().deleteToken { error in
+            if let error = error {
+                print("Errore nell'eliminare il token FCM: \(error)")
+            }
+            Messaging.messaging().token { token, error in
+                if let error = error {
+                    print("Errore nella generazione del nuovo token FCM: \(error)")
+                } else if let token = token {
+                    print("Nuovo token FCM: \(token)")
+                    Task {
+                        do {
+                            _ = try await NotificationAction.create(tokenNotifiche: token)
+                        } catch {
+                            print("Failed to register notification token: \(error)")
+                        }
+                    }
+                } else {
+                    print("Token FCM non disponibile")
+                }
+            }
+        }
+    }
+    
+    /// Chiama questo dopo logout per eliminare il token (e facoltativamente notifica il server)
+    static func deleteFCMToken() {
+        Messaging.messaging().deleteToken { error in
+            if let error = error {
+                print("Errore nell'eliminare il token FCM: \(error)")
+            } else {
+                print("Token FCM eliminato dal device")
+                // Se vuoi notificare il backend che il device è deregistrato, fallo qui.
+            }
+        }
+    }
+    
     // Delegate FCM token
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-        print("FCM registration token: \(String(describing: fcmToken))")
-        // Qui puoi inviare il token al tuo backend
+        print("FCM registration token (delegate): \(String(describing: fcmToken))")
+        Task {
+            do {
+                _ = try await NotificationAction.create(tokenNotifiche: fcmToken ?? "")
+            } catch {
+                print("Failed to register notification token: \(error)")
+            }
+        }
     }
 
     // Gestione notifiche foreground
@@ -65,11 +110,56 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         NSApplication.shared.registerForRemoteNotifications(matching: [.alert, .badge, .sound])
         Messaging.messaging().delegate = self
     }
+
+    // MARK: - FCM Token Helpers
+
+    /// Chiama questo dopo login per rigenerare e inviare il token
+    static func generateAndSendFCMToken() {
+        Messaging.messaging().deleteToken { error in
+            if let error = error {
+                print("Errore nell'eliminare il token FCM: \(error)")
+            }
+            Messaging.messaging().token { token, error in
+                if let error = error {
+                    print("Errore nella generazione del nuovo token FCM: \(error)")
+                } else if let token = token {
+                    print("Nuovo token FCM: \(token)")
+                    Task {
+                        do {
+                            _ = try await NotificationAction.create(tokenNotifiche: token)
+                        } catch {
+                            print("Failed to register notification token: \(error)")
+                        }
+                    }
+                } else {
+                    print("Token FCM non disponibile")
+                }
+            }
+        }
+    }
     
+    /// Chiama questo dopo logout per eliminare il token (e facoltativamente notifica il server)
+    static func deleteFCMToken() {
+        Messaging.messaging().deleteToken { error in
+            if let error = error {
+                print("Errore nell'eliminare il token FCM: \(error)")
+            } else {
+                print("Token FCM eliminato dal device")
+                // Se vuoi notificare il backend che il device è deregistrato, fallo qui.
+            }
+        }
+    }
+
     // Delegate FCM token
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-        print("FCM registration token: \(String(describing: fcmToken))")
-        // Qui puoi inviare il token al tuo backend
+        print("FCM registration token (delegate): \(String(describing: fcmToken))")
+        Task {
+            do {
+                _ = try await NotificationAction.create(tokenNotifiche: fcmToken ?? "")
+            } catch {
+                print("Failed to register notification token: \(error)")
+            }
+        }
     }
 
     // Gestione notifiche foreground
@@ -86,3 +176,4 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
     }
 }
 #endif
+

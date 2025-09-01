@@ -30,6 +30,11 @@ struct VetView: View {
                 form
             }
         }
+        .onAppear(){
+            Task {
+                await viewModel.loadDetail()
+            }
+        }
         .toolbar(content: {
             ToolbarItem(placement: .automatic) {
                 Button(action: {
@@ -52,6 +57,7 @@ struct VetView: View {
                 AppointmentFormView(vet: viewModel.vet)
             }
         }
+        .ignoresSafeArea(edges: .top)
     }
     
     
@@ -112,20 +118,25 @@ struct VetView: View {
     }
 
     var form: some View {
-        
-        
-        return VStack {
-            
-            ListRowView(title: "Nome", value: viewModel.vet.nome)
-            ListRowView(title: "Cognome", value: viewModel.vet.cognome ?? "-")
-            ListRowView(title: "Email", value: viewModel.vet.email ?? "-")
-            ListRowView(title: "Telefono", value: viewModel.vet.telefono ?? "-")
-            ListRowView(title: "Codice Fiscale", value: viewModel.vet.codiceFiscale ?? "-")
-            ListRowView(title: "Indirizzo", value: viewModel.vet.indirizzo ?? "-")
-            ListRowView(title: "Descrizione", value: viewModel.vet.descrizione ?? "-")
+        InlineListView {
+            InlineListRow{
+                ListRowView(title: "Nome", value: viewModel.vet.nome)}
+            InlineListRow{
+                ListRowView(title: "Cognome", value: viewModel.vet.cognome ?? "-")}
+            InlineListRow{
+                ListRowView(title: "Email", value: viewModel.vet.email ?? "-")}
+            InlineListRow{
+                ListRowView(title: "Telefono", value: viewModel.vet.telefono ?? "-")}
+            InlineListRow{
+                ListRowView(title: "Codice Fiscale", value: viewModel.vet.codiceFiscale ?? "-")
+            }
+            InlineListRow{
+                ListRowView(title: "Indirizzo", value: viewModel.vet.indirizzo ?? "-")}
+            InlineListRow{
+                ListRowView(title: "Descrizione", value: viewModel.vet.descrizione ?? "-")
+            }
         }
-        .ignoresSafeArea(edges: .top)
-        
+        .padding()
     }
 }
 

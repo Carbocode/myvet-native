@@ -35,6 +35,8 @@ class AuthManager {
         SecItemDelete(query)
         SecItemAdd(query, nil)
         isAuthenticated = true
+        
+        AppDelegate.generateAndSendFCMToken()
     }
     
     func getToken() -> String? {
@@ -59,5 +61,7 @@ class AuthManager {
         ] as CFDictionary
         SecItemDelete(query)
         isAuthenticated = false
+        
+        AppDelegate.deleteFCMToken()
     }
 }

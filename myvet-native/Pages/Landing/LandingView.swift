@@ -13,47 +13,83 @@ struct LandingView: View {
     
     @State private var showUserForm = false
     @State private var appleCreds: ASAuthorizationAppleIDCredential?
+    
+    @State private var inspectorVisible: Bool = true
 
     var body: some View {
+        #if os(iOS)
         NavigationStack {
-            VStack(spacing: 24) {
-                NavigationLink("Login") {
-                    LoginView()
-                }
-                .tint(.blue)
-                .buttonStyle(.glass)
-                .disabled(viewModel.isLoading)
-
-                NavigationLink("Registrazione") {
-                    UserFormView()
-                }
-                .tint(.blue)
-                .buttonStyle(.glass)
-                .disabled(viewModel.isLoading)
-             
-                SignInWithAppleButton(.signIn) { request in
-                    request.requestedScopes = [.fullName, .email]
-                } onCompletion: { result in
-                    switch result {
-                    case .success(let auth):
-                        if let cred = auth.credential as? ASAuthorizationAppleIDCredential {
-                            viewModel.handleAppleLogin(cred: cred)
-                        }
-                    case .failure(let error):
-                        print(error)
-                    }
-                }
-                .signInWithAppleButtonStyle(.black)
-                .disabled(viewModel.isLoading)
-            }
-            .padding()
-            .navigationDestination(isPresented: $viewModel.showUserForm) {
-                UserFormView(credential: viewModel.pendingCredential)
+            VStack{
+                buttons
+                image
             }
         }
+        #elseif os(macOS)
+        NavigationStack {
+            image
+            .inspector(isPresented: $inspectorVisible){
+                NavigationStack {
+                    buttons
+                }
+            }
+        }
+        #endif
+    }
+    
+    var buttons: some View{
+        VStack(spacing: 24) {
+            Text("Benvenuto su MyVet!")
+                .font(.largeTitle.bold())
+                .multilineTextAlignment(.center)
+                .padding(.top, 8)
+            
+            NavigationLink("Login") {
+                LoginView()
+            }
+            .tint(.blue)
+            .buttonStyle(.glass)
+            .disabled(viewModel.isLoading)
+
+            NavigationLink("Registrazione") {
+                UserFormView()
+            }
+            .tint(.blue)
+            .buttonStyle(.glass)
+            .disabled(viewModel.isLoading)
+            
+            SignInWithAppleButton(.signIn) { request in
+                request.requestedScopes = [.fullName, .email]
+            } onCompletion: { result in
+                switch result {
+                case .success(let auth):
+                    if let cred = auth.credential as? ASAuthorizationAppleIDCredential {
+                        viewModel.handleAppleLogin(cred: cred)
+                    }
+                case .failure(let error):
+                    print(error)
+                }
+            }
+            .signInWithAppleButtonStyle(.black)
+            .disabled(viewModel.isLoading)
+            
+            Spacer()
+        }
+        .padding()
+        .navigationDestination(isPresented: $viewModel.showUserForm) {
+            UserFormView(credential: viewModel.pendingCredential)
+        }
+    }
+    
+    var image: some View{
+        Image(systemName: "pawprint")
+            .resizable()
+            .scaledToFit()
+            .frame(width: 200, height: 200)
+            .foregroundColor(.accentColor)
     }
 }
 
 #Preview {
     LandingView()
 }
+
