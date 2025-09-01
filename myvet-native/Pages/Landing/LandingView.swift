@@ -21,15 +21,20 @@ struct LandingView: View {
         NavigationStack {
             VStack{
                 buttons
-                image
+                backgroundImage
             }
         }
         #elseif os(macOS)
         NavigationStack {
-            image
-            .inspector(isPresented: $inspectorVisible){
-                NavigationStack {
-                    buttons
+            ZStack {
+                backgroundImage
+                VStack{
+                    Rectangle().fill(Color.clear)
+                }
+                .inspector(isPresented: $inspectorVisible){
+                    NavigationStack {
+                        buttons
+                    }
                 }
             }
         }
@@ -80,16 +85,14 @@ struct LandingView: View {
         }
     }
     
-    var image: some View{
-        Image(systemName: "pawprint")
+    var backgroundImage: some View {
+        Image("DogRunning")
             .resizable()
-            .scaledToFit()
-            .frame(width: 200, height: 200)
-            .foregroundColor(.accentColor)
+            .scaledToFill()
+            .ignoresSafeArea()
     }
 }
 
 #Preview {
     LandingView()
 }
-

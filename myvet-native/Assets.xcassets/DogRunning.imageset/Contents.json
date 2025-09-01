@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "perro-corriendo-en-la-playa-10624-2200094208.jpg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "perro-corriendo-en-la-playa-10624-2200094208 1.jpg",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "perro-corriendo-en-la-playa-10624-2200094208 2.jpg",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
