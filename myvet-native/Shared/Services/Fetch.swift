@@ -6,14 +6,14 @@ class Fetch {
     
     /// Metodo generico per effettuare richieste HTTP
     private static func request<T: Decodable & Sendable>(
+        baseUrl: URL,
         endpoint: String,
         method: String,
         body: Encodable? = nil,
         queryParams: [URLQueryItem]? = nil,
-        headers: [String: String] = [:],
-        completion: @escaping (Result<T, Error>) -> Void
-    ) {
-        var url = Config.apiURL.appendingPathComponent(endpoint)
+        headers: [String: String] = [:]
+    ) async throws -> T {
+        var url = baseUrl.appendingPathComponent(endpoint)
         
         if let queryParams = queryParams, !queryParams.isEmpty {
             url.append(queryItems: queryParams)
@@ -27,124 +27,98 @@ class Fetch {
         // Aggiunta degli headers personalizzati
         urlRequest.allHTTPHeaderFields = headers
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-
+        
         //log("🔹 Headers: \(headers)")
         
         // Gestione del body per i metodi diversi da GET
         if let body = body, method != "GET" {
-            if let jsonData = encodeBody(body) {
+            do {
+                let jsonData = try JSONEncoder().encode(body)
                 urlRequest.httpBody = jsonData
-            } else {
-                DispatchQueue.main.async {
-                    completion(.failure(NSError(domain: "JSONEncodingError", code: -3, userInfo: nil)))
+                if let jsonString = String(data: jsonData, encoding: .utf8) {
+                    log("📦 Body: \(jsonString)")
                 }
-                return
+            } catch {
+                log("❌ [Fetch] Errore nella codifica del body JSON: \(error.localizedDescription)")
+                throw error
             }
         }
         
-        let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
-            if let error = error {
-                log("❌ [Fetch] Errore nella richiesta: \(error.localizedDescription)")
-                DispatchQueue.main.async {
-                    completion(.failure(error))
-                }
-                return
-            }
+        do {
+            let (data, response) = try await URLSession.shared.data(for: urlRequest)
             
             guard let httpResponse = response as? HTTPURLResponse else {
-                DispatchQueue.main.async {
-                    completion(.failure(NSError(domain: "InvalidResponse", code: -1, userInfo: nil)))
-                }
-                return
+                log("❌ [Fetch] Risposta non valida")
+                throw NSError(domain: "InvalidResponse", code: -1)
             }
             
             log("📥 [Fetch] Risposta ricevuta - Status Code: \(httpResponse.statusCode)")
             
-            guard let data = data else {
-                log("❌ [Fetch] Nessun dato ricevuto")
-                DispatchQueue.main.async {
-                    completion(.failure(NSError(domain: "NoData", code: -2, userInfo: nil)))
-                }
-                return
+            if let jsonString = String(data: data, encoding: .utf8) {
+                log("📩 Body ricevuto: \(jsonString)")
             }
             
-            DispatchQueue.main.async {
-                handleResponse(data: data, completion: completion)
+            guard (200...299).contains(httpResponse.statusCode) else {
+                throw NSError(domain: "HTTPError", code: httpResponse.statusCode)
             }
+            
+            do {
+                let decoder = JSONDecoder()
+                let decodedResponse: HTTPResponse<T> = try decodeWithDetailedErrors(HTTPResponse<T>.self, from: data, using: decoder)
+                return decodedResponse.body
+            } catch let err as DecodingError {
+                log("❌ [Fetch] DecodingError: \(err)")
+                throw err
+            } catch {
+                log("❌ [Fetch] Decode error: \(error.localizedDescription)")
+                throw error
+            }
+        } catch {
+            log("❌ [Fetch] Errore nella richiesta: \(error.localizedDescription)")
+            throw error
         }
-        
-        task.resume()
     }
     
     /// Metodo GET
     static func get<T: Decodable & Sendable>(
+        baseUrl: URL = Config.apiURL,
         endpoint: String,
         queryParams: [URLQueryItem]? = nil,
-        headers: [String: String] = [:],
-        completion: @escaping (Result<T, Error>) -> Void
-    ) {
-        request(endpoint: endpoint, method: "GET", queryParams: queryParams, headers: headers, completion: completion)
+        headers: [String: String] = [:]
+    ) async throws -> T {
+        try await request(baseUrl: baseUrl, endpoint: endpoint, method: "GET", queryParams: queryParams, headers: headers)
     }
     
     /// Metodo POST
     static func post<T: Decodable & Sendable>(
+        baseUrl: URL = Config.apiURL,
         endpoint: String,
         body: Encodable,
         queryParams: [URLQueryItem]? = nil,
-        headers: [String: String] = [:],
-        completion: @escaping (Result<T, Error>) -> Void
-    ) {
-        request(endpoint: endpoint, method: "POST", body: body, queryParams: queryParams, headers: headers, completion: completion)
+        headers: [String: String] = [:]
+    ) async throws -> T {
+        try await request(baseUrl: baseUrl, endpoint: endpoint, method: "POST", body: body, queryParams: queryParams, headers: headers)
     }
     
     /// Metodo PUT
     static func put<T: Decodable & Sendable>(
+        baseUrl: URL = Config.apiURL,
         endpoint: String,
         body: Encodable,
         queryParams: [URLQueryItem]? = nil,
-        headers: [String: String] = [:],
-        completion: @escaping (Result<T, Error>) -> Void
-    ) {
-        request(endpoint: endpoint, method: "PUT", body: body, queryParams: queryParams, headers: headers, completion: completion)
+        headers: [String: String] = [:]
+    ) async throws -> T {
+        try await request(baseUrl: baseUrl, endpoint: endpoint, method: "PUT", body: body, queryParams: queryParams, headers: headers)
     }
     
     /// Metodo DELETE
     static func delete<T: Decodable & Sendable>(
+        baseUrl: URL = Config.apiURL,
         endpoint: String,
         queryParams: [URLQueryItem]? = nil,
-        headers: [String: String] = [:],
-        completion: @escaping (Result<T, Error>) -> Void
-    ) {
-        request(endpoint: endpoint, method: "DELETE", queryParams: queryParams, headers: headers, completion: completion)
-    }
-    
-    /// Funzione per codificare il body in JSON
-    private static func encodeBody(_ body: Encodable) -> Data? {
-        do {
-            let jsonData = try JSONEncoder().encode(body)
-            if let jsonString = String(data: jsonData, encoding: .utf8) {
-                log("📦 Body: \(jsonString)")
-            }
-            return jsonData
-        } catch {
-            log("❌ [Fetch] Errore nella codifica del body JSON: \(error.localizedDescription)")
-            return nil
-        }
-    }
-    
-    /// Funzione per gestire la decodifica della risposta
-    private static func handleResponse<T: Decodable & Sendable>(data: Data, completion: @escaping (Result<T, Error>) -> Void) {
-        if let jsonString = String(data: data, encoding: .utf8) {
-            log("📩 Body ricevuto: \(jsonString)")
-        }
-        
-        do {
-            let decodedResponse = try JSONDecoder().decode(HTTPResponse<T>.self, from: data)
-            completion(.success(decodedResponse.body))
-        } catch {
-            log("❌ [Fetch] Errore nella decodifica della risposta: \(error.localizedDescription)")
-            completion(.failure(error))
-        }
+        headers: [String: String] = [:]
+    ) async throws -> T {
+        try await request(baseUrl: baseUrl, endpoint: endpoint, method: "DELETE", queryParams: queryParams, headers: headers)
     }
     
     /// Funzione per il logging (attivabile/disattivabile con `debugMode`)
@@ -153,5 +127,32 @@ class Fetch {
             print(message)
         }
     }
+    
+    private static func decodeWithDetailedErrors<T: Decodable>(
+            _ type: T.Type,
+            from data: Data,
+            using decoder: JSONDecoder = JSONDecoder()
+        ) throws -> T {
+            do {
+                return try decoder.decode(T.self, from: data)
+            } catch let err as DecodingError {
+                // Prova a pretty-printare il payload per debugging
+                if let obj = try? JSONSerialization.jsonObject(with: data, options: []),
+                   let pretty = try? JSONSerialization.data(withJSONObject: obj, options: [.prettyPrinted]),
+                   let prettyStr = String(data: pretty, encoding: .utf8) {
+                    log("📄 JSON (pretty):\n\(prettyStr)")
+                } else if let raw = String(data: data, encoding: .utf8) {
+                    log("📄 JSON (raw):\n\(raw)")
+                }
+                log("❌ DecodingError:\n\(err)")
+                throw err
+            } catch {
+                if let raw = String(data: data, encoding: .utf8) {
+                    log("📄 JSON (raw):\n\(raw)")
+                }
+                log("❌ Decode error generico: \(error)")
+                throw error
+            }
+        }
 }
 

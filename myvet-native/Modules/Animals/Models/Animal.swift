@@ -19,7 +19,7 @@ struct Animal: Identifiable, Hashable, Codable, Equatable {
     var peso: Double?
     var sterilizzato: Int?
     var assicurato: Int?
-    var immagine: String?
+    var immagine: String = "default.png"
     var microchip: String?
     var passaporto: String?
     var idSpecie: Int?
@@ -46,7 +46,6 @@ struct Animal: Identifiable, Hashable, Codable, Equatable {
         peso: 14.5,
         sterilizzato: 1,
         assicurato: 0,
-        immagine: "default.png",
         microchip: "123456789012345",
         passaporto: "IT123456",
         idSpecie: 1,
@@ -60,4 +59,8 @@ struct Animal: Identifiable, Hashable, Codable, Equatable {
         mantello: "Marrone",
         descrizione: "Cane molto socievole e giocherellone."
     )
+    
+    static func == (lhs: Animal, rhs: Animal) -> Bool {
+        lhs.id == rhs.id
+    }
 }

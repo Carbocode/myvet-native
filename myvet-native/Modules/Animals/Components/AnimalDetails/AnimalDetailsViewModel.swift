@@ -7,8 +7,9 @@
 
 import Foundation
 
-class AnimalDetailsViewModel: ObservableObject {
-    @Published var animal: Animal
+@Observable @MainActor
+class AnimalDetailsViewModel{
+    var animal: Animal
     
     init(animal: Animal) {
         self.animal = animal

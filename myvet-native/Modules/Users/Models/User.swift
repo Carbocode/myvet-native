@@ -19,5 +19,9 @@ struct User: Identifiable, Hashable, Codable, Equatable {
     var immagine: String?
     
     var id: Int { idAccount }
+    
+    static func == (lhs: User, rhs: User) -> Bool {
+        lhs.id == rhs.id
+    }
 }
 

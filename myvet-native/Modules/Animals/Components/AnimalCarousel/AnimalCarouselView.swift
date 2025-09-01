@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AnimalCarouselView: View {
-    @StateObject var viewModel = AnimalCarouselViewModel()
+    @State var viewModel = AnimalCarouselViewModel()
 
     var body: some View {
         VStack {
@@ -18,9 +18,17 @@ struct AnimalCarouselView: View {
                         NavigationLink(destination: AnimalView(animal: animal)) {
                             AnimalProfileCardView(animal: animal, isVertical: true)
                         }
+                        .scrollTransition{content, phase in
+                            content
+                                .opacity(phase.isIdentity ? 1.0 : 0.5)
+                                .scaleEffect(phase.isIdentity ? 1.0 : 0.9)
+                        }
                     }
                 }
+                .scrollTargetLayout()
             }
+            .scrollTargetBehavior(.viewAligned)
+            .contentMargins(16, for: .scrollContent)
             .frame(height: 150)
         }
     }

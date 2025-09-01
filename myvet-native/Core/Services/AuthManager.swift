@@ -8,10 +8,11 @@
 import Foundation
 import Security
 
-class AuthManager: ObservableObject {
+@Observable
+class AuthManager {
     static let shared = AuthManager()
     
-    @Published var isAuthenticated: Bool = false
+    var isAuthenticated: Bool = false
     
     private let jwtKey = "jwtToken"
     

@@ -15,29 +15,15 @@ import AppKit
 #endif
 
 class AnimalsActions {
-    static func readAll(completion: @escaping (Result<[Animal], Error>) -> Void) {
-        Fetch.get(endpoint: "/animals/read-all", headers: ["Authorization": AuthManager.shared.getToken() ?? ""]) { (result: Result<[Animal], Error>) in
-            switch result {
-            case .success(let response):
-                completion(.success(response))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
+    static func readAll() async throws -> [Animal] {
+        return try await Fetch.get(endpoint: "/animals/read-all", headers: ["Authorization": AuthManager.shared.getToken() ?? ""])
     }
     
-    static func read(id: Int, completion: @escaping (Result<Animal, Error>) -> Void) {
-        Fetch.get(endpoint: "/animals/read?id=\(id)", headers: ["Authorization": AuthManager.shared.getToken() ?? ""]) { (result: Result<Animal, Error>) in
-            switch result {
-            case .success(let response):
-                completion(.success(response))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
+    static func read(id: Int) async throws -> Animal {
+        return try await Fetch.get(endpoint: "/animals/read?id=\(id)", headers: ["Authorization": AuthManager.shared.getToken() ?? ""])
     }
     
-    static func create(_ animal: AnimalCreateRequest, image: PlatformImage? = nil, completion: @escaping (Result<AnimalCreateResponse, Error>) -> Void) {
+    static func create(_ animal: AnimalCreateRequest, image: PlatformImage? = nil) async throws -> AnimalCreateResponse {
         var animal = animal
         
         if let img = image {
@@ -47,16 +33,7 @@ class AnimalsActions {
             }
         }
         
-        
-        
-        Fetch.post(endpoint: "/animals/create", body: animal, headers: ["Authorization": AuthManager.shared.getToken() ?? ""]) { (result: Result<AnimalCreateResponse, Error>) in
-            switch result {
-            case .success(let response):
-                completion(.success(response))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
+        return try await Fetch.post(endpoint: "/animals/create", body: animal, headers: ["Authorization": AuthManager.shared.getToken() ?? ""])
     }
     
     private static func convertImageToBase64AndExtension(image: PlatformImage) -> (String, String)? {

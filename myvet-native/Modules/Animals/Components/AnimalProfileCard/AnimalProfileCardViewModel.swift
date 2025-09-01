@@ -7,9 +7,9 @@
 
 import Foundation
 
-// ViewModel: gestisce i dati per AnimalCardView
-class AnimalProfileCardViewModel: ObservableObject {
-    @Published final var animal: Animal  // Dati dell'animale
+@Observable @MainActor
+class AnimalProfileCardViewModel {
+    final var animal: Animal  // Dati dell'animale
     
     // Inizializziamo il ViewModel con un animale
     init(animal: Animal) {

@@ -8,14 +8,24 @@
 import SwiftUI
 
 struct AnimalListView: View {
-    @StateObject var viewModel = AnimalListViewModel()
+    @State var viewModel = AnimalListViewModel()
 
     var body: some View {
-        // Sidebar: Elenco degli animali
-        List(viewModel.animals, id: \.id) { animal in
-            NavigationLink(destination: AnimalView(animal: animal)) {
-                AnimalProfileCardView(animal: animal)
+        List {
+            if viewModel.isLoading {
+                ProgressView()
+            } else if let errorMessage = viewModel.errorMessage {
+                Text(errorMessage)
+            } else {
+                ForEach(viewModel.animals, id: \.id) { animal in
+                    NavigationLink(destination: AnimalView(animal: animal)){
+                        AnimalProfileCardView(animal: animal)
+                    }
+                }
             }
+        }
+        .onAppear {
+            Task { await viewModel.read() }
         }
     }
 }

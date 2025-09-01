@@ -7,14 +7,23 @@
 
 import SwiftUI
 import PhotosUI
+import AuthenticationServices
 
 struct UserFormView: View {
     @Environment(\.dismiss) private var dismiss
-    @StateObject var viewModel = UserFormViewModel()
+    @State var viewModel = UserFormViewModel()
     
     @State private var isSaving = false
     @State private var showSaveError = false
     @State private var saveErrorMessage = ""
+    
+    init(credential: ASAuthorizationAppleIDCredential? = nil) {
+        guard let cred = credential else { return }
+        viewModel.codiceUtenteApple = cred.user
+        if let g = cred.fullName?.givenName    { viewModel.nome = g }
+        if let f = cred.fullName?.familyName   { viewModel.cognome = f }
+        if let e = cred.email                  { viewModel.email = e } // solo la prima autorizzazione
+    }
     
     var inner: some View {
         Form {
@@ -70,21 +79,10 @@ struct UserFormView: View {
                 dismiss()
             }
             Button("Salva", role: .confirm) {
-                isSaving = true
-                viewModel.createUser { result in
-                    isSaving = false
-                    switch result {
-                    case .success:
-                        dismiss()
-                    case .failure(let error):
-                        saveErrorMessage = error.localizedDescription
-                        showSaveError = true
-                    }
-                }
+                viewModel.createUser()
             }
             .tint(.blue)
             .buttonStyle(.borderedProminent)
-            .disabled(isSaving)
 #endif
         }
 #if os(macOS)
@@ -116,17 +114,7 @@ struct UserFormView: View {
             }
             ToolbarItem(placement: .confirmationAction) {
                 Button {
-                    isSaving = true
-                    viewModel.createUser { result in
-                        isSaving = false
-                        switch result {
-                        case .success:
-                            dismiss()
-                        case .failure(let error):
-                            saveErrorMessage = error.localizedDescription
-                            showSaveError = true
-                        }
-                    }
+                    viewModel.createUser()
                 } label: {
                     if isSaving {
                         ProgressView()
@@ -151,7 +139,7 @@ struct UserFormView: View {
 
 #Preview {
     NavigationStack {
-        UserFormView(viewModel: .init())
+        UserFormView()
     }
 }
 

@@ -7,18 +7,22 @@
 
 import Foundation
 
-class AnimalListViewModel: ObservableObject {
-    @Published var animals: [Animal] = []
+@Observable @MainActor
+class AnimalListViewModel {
     
-    init() {
-        AnimalsActions.readAll() { result in
-            switch result {
-                case .success(let result):
-                self.animals = result
-                case .failure(let error):
-                    print(error)
-            }
-            
+    var animals: [Animal] = []
+    var isLoading = false
+    var errorMessage: String? = nil
+    
+    func read() async {
+        isLoading = true
+        errorMessage = nil
+        do {
+            let results = try await AnimalsActions.readAll()
+            self.animals = results
+        } catch {
+            self.errorMessage = error.localizedDescription
         }
+        isLoading = false
     }
 }

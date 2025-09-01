@@ -3,45 +3,56 @@ import Foundation
 import AppKit
 #endif
 
-class AnimalFormViewModel: ObservableObject {
+enum SaveResult: Equatable {
+    case success
+    case failure(message: String)    // errori rete/server generici
+}
+
+@Observable @MainActor
+class AnimalFormViewModel {
     
-    @Published var selectedImage: PlatformImage? = nil
-    @Published var nome: String = ""
-    @Published var microchip: String = ""
-    @Published var passaporto: String = ""
-    @Published var dataNascita: Date = Date()
-    @Published var luogoNascita: String = ""
-    @Published var sesso: String = "M"
-    @Published var idTaglia: Int? = nil
-    @Published var idAttivita: Int? = nil
-    @Published var idCorporatura: Int? = nil
-    @Published var peso: Double? = nil
-    @Published var sterilizzato: Bool = false
-    @Published var assicurato: Bool = false
-    @Published var idSpecie: Int = 2{
+    var selectedImage: PlatformImage? = nil
+    var nome: String = ""
+    var microchip: String = ""
+    var passaporto: String = ""
+    var dataNascita: Date = Date()
+    var luogoNascita: String = ""
+    var sesso: String = "M"
+    var idTaglia: Int? = nil
+    var idAttivita: Int? = nil
+    var idCorporatura: Int? = nil
+    var peso: Double? = nil
+    var sterilizzato: Bool = false
+    var assicurato: Bool = false
+    var idSpecie: Int = 2{
         didSet {
-            getRaces()
+            Task{
+                await getRaces()
+            }
+            
         }
     }
-    @Published var idRazza: Int? = nil
-    @Published var mantello: String = ""
-    @Published var descrizione: String = ""
+    var idRazza: Int? = nil
+    var mantello: String = ""
+    var descrizione: String = ""
     
-    @Published var species: [Species] = []
-    @Published var bcs: [Bcs] = []
-    @Published var activityLevels: [ActivityLevel] = []
-    @Published var sizes: [Size] = []
-    @Published var races: [Race] = []
+    var species: [Species] = []
+    var bcs: [Bcs] = []
+    var activityLevels: [ActivityLevel] = []
+    var sizes: [Size] = []
+    var races: [Race] = []
     
     init(){
-        getSpecies()
-        getRaces()
-        getSizes()
-        getBcs()
-        getActivityLevels()
+        Task{
+            await getSpecies()
+            await getRaces()
+            await getSizes()
+            await getBcs()
+            await getActivityLevels()
+        }
     }
     
-    func createAnimal(completion: @escaping (Result<AnimalCreateResponse, Error>) -> Void) {
+    func createAnimal() async -> SaveResult {
         let animalRequest = AnimalCreateRequest(
             Nome: nome,
             Microchip: microchip,
@@ -59,54 +70,52 @@ class AnimalFormViewModel: ObservableObject {
             Mantello: mantello,
             Descrizione: descrizione,
         )
-        AnimalsActions.create(animalRequest, image: selectedImage) { result in
-            completion(result)
+        
+        do{
+            let _ = try await AnimalsActions.create(animalRequest, image: selectedImage)
+            return .success
+        }catch{
+            return .failure(message: error.localizedDescription)
         }
     }
     
-    func getSpecies() {
-        SpeciesActions.read { result in
-            switch result {
-            case .success(let data): self.species = data
-            case .failure: self.species = []
-            }
+    func getSpecies() async {
+        do{
+            species = try await SpeciesActions.read()
+        }catch{
+            
         }
     }
     
-    func getBcs() {
-        BcsActions.read { result in
-            switch result {
-            case .success(let data): self.bcs = data
-            case .failure: self.bcs = []
-            }
+    func getBcs() async {
+        do{
+            bcs = try await BcsActions.read()
+        }catch{
+            
         }
     }
     
-    func getSizes() {
-        SizesActions.read { result in
-            switch result {
-            case .success(let data): self.sizes = data
-            case .failure: self.sizes = []
-            }
+    func getSizes() async {
+        do{
+            sizes = try await SizesActions.read()
+        }catch{
+            
         }
     }
     
-    func getActivityLevels() {
-        ActivityLevelsActions.read { result in
-            switch result {
-            case .success(let data): self.activityLevels = data
-            case .failure: self.activityLevels = []
-            }
+    func getActivityLevels() async {
+        do{
+            activityLevels = try await ActivityLevelsActions.read()
+        }catch{
+            
         }
     }
     
-    func getRaces() {
-        RacesActions.read(idSpecie: idSpecie) { result in
-            switch result {
-            case .success(let data): self.races = data
-            case .failure: self.races = []
-            }
+    func getRaces() async {
+        do{
+            races = try await RacesActions.read(idSpecie: idSpecie)
+        }catch{
+            
         }
     }
 }
-

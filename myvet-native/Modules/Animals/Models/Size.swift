@@ -12,4 +12,8 @@ struct Size: Identifiable, Hashable, Codable, Equatable {
     let mesiFineCucciolo: Int?
     
     var id: Int { idTaglia }
+    
+    static func == (lhs: Size, rhs: Size) -> Bool {
+        lhs.id == rhs.id
+    }
 }

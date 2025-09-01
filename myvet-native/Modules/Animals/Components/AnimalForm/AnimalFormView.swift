@@ -10,7 +10,7 @@ import PhotosUI
 
 struct AnimalFormView: View {
     @Environment(\.dismiss) private var dismiss
-    @StateObject var viewModel = AnimalFormViewModel()
+    @State var viewModel = AnimalFormViewModel()
     
     @State private var isSaving = false
     @State private var showSaveError = false
@@ -160,21 +160,20 @@ struct AnimalFormView: View {
                 dismiss()
             }
             Button("Salva", role: .confirm) {
-                isSaving = true
-                viewModel.createAnimal { result in
-                    isSaving = false
+                Task{
+                    let result = await viewModel.createAnimal()
                     switch result {
+                        
                     case .success:
                         dismiss()
-                    case .failure(let error):
-                        saveErrorMessage = error.localizedDescription
-                        showSaveError = true
+                    case .failure(message: let message):
+                        print(message)
                     }
                 }
+                
             }
             .tint(.blue)
             .buttonStyle(.borderedProminent)
-            .disabled(isSaving)
 #endif
         }
 #if os(macOS)
@@ -206,15 +205,14 @@ struct AnimalFormView: View {
             }
             ToolbarItem(placement: .confirmationAction) {
                 Button {
-                    isSaving = true
-                    viewModel.createAnimal { result in
-                        isSaving = false
+                    Task{
+                        let result = await viewModel.createAnimal()
                         switch result {
+                            
                         case .success:
                             dismiss()
-                        case .failure(let error):
-                            saveErrorMessage = error.localizedDescription
-                            showSaveError = true
+                        case .failure(message: let message):
+                            print(message)
                         }
                     }
                 } label: {

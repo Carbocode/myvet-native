@@ -8,15 +8,9 @@
 import Foundation
 
 class RacesActions {
-    static func read(idSpecie: Int, completion: @escaping (Result<[Race], Error>) -> Void) {
-        Fetch.get(endpoint: "/animals/races/read", queryParams: [URLQueryItem(name: "IDSpecie", value: String(idSpecie))], headers: ["Authorization": AuthManager.shared.getToken() ?? ""]) { (result: Result<[Race], Error>) in
-            switch result {
-                case .success(let response):
-                    completion(.success(response))
-                case .failure(let error):
-                    completion(.failure(error))
-            }
-        }
+    static func read(idSpecie: Int) async throws -> [Race] {
+        let queryParams: [URLQueryItem] = [URLQueryItem(name: "IDSpecie", value: String(idSpecie))]
+        return try await Fetch.get(endpoint: "/animals/races/read", queryParams: queryParams, headers: ["Authorization": AuthManager.shared.getToken() ?? ""])
     }
 }
 

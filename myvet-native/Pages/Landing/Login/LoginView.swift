@@ -8,15 +8,12 @@
 import SwiftUI
 
 struct LoginView: View {
-    @ObservedObject private var viewModel = LoginViewModel()
+    @State private var viewModel = LoginViewModel()
     
     var body: some View {
         
 #if os(iOS)
-        VStack {
-            Text("Login")
-                .font(.largeTitle)
-                .fontWeight(.bold)
+        Form {
             
             TextField("Email", text: $viewModel.loginRequest.Email)
                 .padding()
@@ -56,6 +53,7 @@ struct LoginView: View {
             }
             
         }
+        .navigationTitle("Login")
         .frame(maxHeight: .infinity, alignment: .top)
         .frame(maxWidth: 400)
         .padding()

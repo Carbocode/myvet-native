@@ -14,4 +14,8 @@ struct ActivityLevel: Identifiable, Hashable, Codable, Equatable {
     let moltiplicatore: Double?
     
     var id: Int { idAttivita }
+    
+    static func == (lhs: ActivityLevel, rhs: ActivityLevel) -> Bool {
+        lhs.id == rhs.id
+    }
 }

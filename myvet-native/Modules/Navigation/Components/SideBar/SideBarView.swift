@@ -15,52 +15,28 @@ struct SideBarView: View {
     var body: some View {
         NavigationSplitView {
             VStack {
-                HStack {
-                    TextField("Cerca…", text: $searchText)
-                        .textFieldStyle(.roundedBorder)
-                        .focused($isSearchFocused)
-                    if isSearchFocused {
-                        Button {
-                            isSearchFocused = false
-                            selectedItem = .home
-                        } label: {
-                            Image(systemName: "xmark.circle.fill")
-                        }
-                        .buttonStyle(PlainButtonStyle())
-                    }
-                }
-                .padding([.top, .horizontal])
-                .onChange(of: isSearchFocused) { _, newFocused in
-                    if newFocused {
-                        selectedItem = .search
-                    }
-                }
-                if !isSearchFocused {
-                    List(selection: $selectedItem) {
-                        Section {
-                            NavigationLink(value: SidebarItem.account) {
-                                ProfileTabView()
-                            }
-                        }
-                        Section("Principali") {
-                            NavigationLink(value: SidebarItem.home) {
-                                Label("Home", systemImage: "house.fill")
-                            }
-                            NavigationLink(value: SidebarItem.myPet) {
-                                Label("MyPet", systemImage: "pawprint.fill")
-                            }
-                            NavigationLink(value: SidebarItem.myVet) {
-                                Label("MyVet", systemImage: "stethoscope")
-                            }
+                List(selection: $selectedItem) {
+                    Section {
+                        NavigationLink(value: SidebarItem.account) {
+                            ProfileTabView()
                         }
                     }
-                    .listStyle(.sidebar)
-                }
-                else{
-                    List {
-                        Text("Results")
+                    Section("Principali") {
+                        NavigationLink(value: SidebarItem.home) {
+                            Label("Home", systemImage: "house.fill")
+                        }
+                        NavigationLink(value: SidebarItem.myPet) {
+                            Label("MyPet", systemImage: "pawprint.fill")
+                        }
+                        NavigationLink(value: SidebarItem.myVet) {
+                            Label("MyVet", systemImage: "stethoscope")
+                        }
+                        NavigationLink(value: SidebarItem.search) {
+                            Label("Search", systemImage: "magnifyingglass")
+                        }
                     }
                 }
+                .listStyle(.sidebar)
             }
             .onAppear {
                 if selectedItem == nil {
@@ -102,3 +78,4 @@ struct SideBarView: View {
     @Previewable @State var searchText: String = ""
     SideBarView(selectedItem: $selectedItem, searchText: $searchText)
 }
+

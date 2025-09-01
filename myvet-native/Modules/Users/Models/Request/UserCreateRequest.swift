@@ -18,4 +18,5 @@ struct UserCreateRequest: Encodable {
     var CondizioniGenerali: Bool
     var Immagine: String?
     var Estensione: String?
+    var CodiceUtenteApple: String?
 }

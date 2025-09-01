@@ -13,6 +13,10 @@ struct MyPetView: View {
     
     var body: some View {
         AnimalListView()
+            .navigationTitle("Animali")
+        #if os(iOS)
+            .listStyle(.insetGrouped)
+        #endif
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button {
@@ -31,5 +35,7 @@ struct MyPetView: View {
 }
 
 #Preview {
-    MyPetView()
+    NavigationStack{
+        MyPetView()
+    }
 }

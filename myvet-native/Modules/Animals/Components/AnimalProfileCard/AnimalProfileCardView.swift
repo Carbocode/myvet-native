@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AnimalProfileCardView: View {
-    @ObservedObject var viewModel: AnimalProfileCardViewModel
+    @State var viewModel: AnimalProfileCardViewModel
     let isVertical: Bool
     
     init(animal: Animal, isVertical: Bool = false) {
@@ -19,7 +19,7 @@ struct AnimalProfileCardView: View {
     var body: some View {
         if isVertical {
             VStack {
-                let fullURL = Config.animalURL.appendingPathComponent("/" + (viewModel.animal.immagine ?? "/default.png"))
+                let fullURL = Config.animalURL.appendingPathComponent("/" + (viewModel.animal.immagine))
                 AsyncImage(url: fullURL)
                 { image in
                     image
@@ -29,7 +29,7 @@ struct AnimalProfileCardView: View {
                     ProgressView()
                 }
                 .frame(width: 80, height: 80)
-                .clipShape(RoundedRectangle(cornerRadius: 25, style: .continuous))
+                .clipShape(Circle())
                 
                 Text(viewModel.animal.nome)
                     .font(.headline)
@@ -40,7 +40,7 @@ struct AnimalProfileCardView: View {
             .padding()
         } else {
             HStack {
-                let fullURL = Config.animalURL.appendingPathComponent("/" + (viewModel.animal.immagine ?? "/default.png"))
+                let fullURL = Config.animalURL.appendingPathComponent("/" + (viewModel.animal.immagine))
                 AsyncImage(url: fullURL)
                 { image in
                     image
@@ -49,7 +49,7 @@ struct AnimalProfileCardView: View {
                 } placeholder: {
                     ProgressView()
                 }
-                .frame(width: 80, height: 80)
+                .frame(width: 50, height: 50)
                 .clipShape(RoundedRectangle(cornerRadius: 25, style: .continuous))
                 
                 VStack(alignment: .leading) {
@@ -64,7 +64,6 @@ struct AnimalProfileCardView: View {
                         .lineLimit(1)
                 }
             }
-            .padding()
         }
     }
 }
@@ -75,3 +74,6 @@ struct AnimalProfileCardView: View {
         AnimalProfileCardView(animal: Animal.example, isVertical: true)
     }
 }
+
+
+

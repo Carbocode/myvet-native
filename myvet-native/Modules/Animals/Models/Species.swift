@@ -10,4 +10,8 @@ struct Species: Identifiable, Hashable, Codable, Equatable {
     let nome: String
     
     var id: Int { idSpecie }
+    
+    static func == (lhs: Species, rhs: Species) -> Bool {
+        lhs.id == rhs.id
+    }
 }

@@ -9,35 +9,74 @@ import SwiftUI
 
 struct ProfilePictureView: View {
     let url: URL?
+    let defaultUrl: URL?
     let name: String
     
     var body: some View {
         HStack(alignment: .top, spacing: 0) {
             ZStack {
-                AsyncImage(url: url) { image in
-                    image
-                        .resizable()
-                        .scaledToFill()
-                        .blur(radius: 100)
-                        .frame(maxWidth: .infinity, minHeight: 300, )
-                        .clipShape(Rectangle())
-                } placeholder: {
-                    Color.clear
-                        .frame(maxWidth: .infinity, minHeight: 300, )
-                        .clipShape(Rectangle())
+                AsyncImage(url: url) { phase in
+                    switch phase {
+                    case .empty:
+                        ProgressView()
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .scaledToFill()
+                    case .failure:
+                        AsyncImage(url: url) { phase in
+                            switch phase {
+                            case .empty:
+                                ProgressView()
+                            case .success(let image):
+                                image
+                                    .resizable()
+                                    .scaledToFill()
+                            case .failure:
+                                ProgressView()
+                            @unknown default:
+                                ProgressView()
+                            }
+                        }
+                    @unknown default:
+                        ProgressView()
+                    }
                 }
+                .frame(maxWidth: .infinity, minHeight: 300)
+                .clipShape(Rectangle())
+                .blur(radius: 100)
                 
-                AsyncImage(url: url) { image in
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(maxWidth: .infinity, minHeight: 300, )
-                        .clipShape(Rectangle())
-                } placeholder: {
-                    ProgressView()
-                        .frame(maxWidth: .infinity, minHeight: 300)
-                        .clipShape(Rectangle())
+                
+                
+                AsyncImage(url: url) { phase in
+                    switch phase {
+                    case .empty:
+                        ProgressView()
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .scaledToFill()
+                    case .failure:
+                        AsyncImage(url: url) { phase in
+                            switch phase {
+                            case .empty:
+                                ProgressView()
+                            case .success(let image):
+                                image
+                                    .resizable()
+                                    .scaledToFill()
+                            case .failure:
+                                ProgressView()
+                            @unknown default:
+                                ProgressView()
+                            }
+                        }
+                    @unknown default:
+                        ProgressView()
+                    }
                 }
+                .frame(maxWidth: .infinity, minHeight: 300)
+                .clipShape(Rectangle())
                 
                 VStack {
                     Spacer()
@@ -71,5 +110,5 @@ struct ProfilePictureView: View {
 }
 
 #Preview {
-    ProfilePictureView(url: nil, name: "Sample Name")
+    ProfilePictureView(url: nil, defaultUrl: nil, name: "Sample Name")
 }

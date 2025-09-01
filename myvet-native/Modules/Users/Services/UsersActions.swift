@@ -16,18 +16,11 @@ import AppKit
 
 class UsersActions {
     
-    static func read(completion: @escaping (Result<User, Error>) -> Void) {
-        Fetch.get(endpoint: "/accounts/read", headers: ["Authorization": AuthManager.shared.getToken() ?? ""]) { (result: Result<User, Error>) in
-            switch result {
-            case .success(let response):
-                completion(.success(response))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
+    static func read() async throws -> User {
+        return try await Fetch.get(endpoint: "/accounts/read", headers: ["Authorization": AuthManager.shared.getToken() ?? ""])
     }
     
-    static func create(_ user: UserCreateRequest, image: PlatformImage? = nil, completion: @escaping (Result<UserCreateResponse, Error>) -> Void) {
+    static func create(_ user: UserCreateRequest, image: PlatformImage? = nil) async throws -> UserCreateResponse {
         var user = user
         
         if let img = image {
@@ -37,16 +30,7 @@ class UsersActions {
             }
         }
         
-        
-        
-        Fetch.post(endpoint: "/accounts/create", body: user, headers: ["Authorization": AuthManager.shared.getToken() ?? ""]) { (result: Result<UserCreateResponse, Error>) in
-            switch result {
-            case .success(let response):
-                completion(.success(response))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
+        return try await Fetch.post(endpoint: "/accounts/create", body: user, headers: ["Authorization": AuthManager.shared.getToken() ?? ""])
     }
     
     private static func convertImageToBase64AndExtension(image: PlatformImage) -> (String, String)? {

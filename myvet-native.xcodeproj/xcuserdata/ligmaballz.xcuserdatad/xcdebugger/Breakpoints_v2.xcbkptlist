@@ -3,4 +3,38 @@
    uuid = "9ECBDC82-76B4-40A8-9DA0-CB11A0D2E97B"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CDEA17D4-8B35-4FE2-85E7-E4EDFC4F6277"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../../../var/folders/2n/l_b_219s5ys8hzkm05p___qr0000gn/T/swift-generated-sources/@__swiftmacro_12myvet_native0032AnimalProfileCardViewswift_jIADjfMX71_0_33_A304CCCC9F5098A7107F542C806A3531Ll7PreviewfMf_.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1"
+            endingLineNumber = "1"
+            landmarkName = "$s12myvet_native0032AnimalProfileCardViewswift_jIADjfMX71_0_33_A304CCCC9F5098A7107F542C806A3531Ll7PreviewfMf_15PreviewRegistryfMu_"
+            landmarkType = "37">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BB274E4F-94C2-4BCE-BDB6-49E35BF40149"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../../../var/folders/2n/l_b_219s5ys8hzkm05p___qr0000gn/T/swift-generated-sources/@__swiftmacro_12myvet_native12VetViewModelC10isFavorite10ObservablefMr0_.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1"
+            endingLineNumber = "1"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

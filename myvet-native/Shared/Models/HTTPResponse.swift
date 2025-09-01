@@ -12,4 +12,5 @@ struct HTTPResponse<T: Decodable>: Decodable {
     let status: Int
     let description: String
     let body: T
+    let log: [String]?
 }

@@ -7,18 +7,21 @@
 
 import Foundation
 
-class AnimalCarouselViewModel: ObservableObject {
-    @Published var animals: [Animal] = []
+@Observable @MainActor
+class AnimalCarouselViewModel {
+    var animals: [Animal] = []
     
     init() {
-        AnimalsActions.readAll() { result in
-            switch result {
-                case .success(let result):
-                self.animals = result
-                case .failure(let error):
-                    print(error)
-            }
-            
+        Task {
+            await loadAnimals()
+        }
+    }
+    
+    func loadAnimals() async {
+        do {
+            animals = try await AnimalsActions.readAll()
+        } catch {
+            // handle error if needed
         }
     }
 }

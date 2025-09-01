@@ -14,4 +14,8 @@ struct Bcs: Identifiable, Hashable, Codable, Equatable {
     let moltiplicatore: Double?
     
     var id: Int { idCorporatura }
+    
+    static func == (lhs: Bcs, rhs: Bcs) -> Bool {
+        lhs.id == rhs.id
+    }
 }

@@ -13,4 +13,8 @@ struct Race: Identifiable, Hashable, Codable, Equatable {
     let moltiplicatore: Double?
     
     var id: Int { idRazza }
+    
+    static func == (lhs: Race, rhs: Race) -> Bool {
+        lhs.id == rhs.id
+    }
 }

@@ -8,14 +8,13 @@
 import SwiftUI
 
 struct AnimalDetailsView: View {
-    @StateObject var viewModel: AnimalDetailsViewModel
+    @State var viewModel: AnimalDetailsViewModel
     
     init(animal: Animal) {
-        _viewModel = StateObject(wrappedValue: AnimalDetailsViewModel(animal: animal))
+        _viewModel = State(wrappedValue: AnimalDetailsViewModel(animal: animal))
     }
     
     var body: some View {
-        Form {
             ListRowView(title: "Nome", value: viewModel.animal.nome)
             ListRowView(title: "Specie", value: viewModel.animal.nomeSpecie ?? "-")
             ListRowView(title: "Razza", value: viewModel.animal.nomeRazza ?? "-")
@@ -28,8 +27,6 @@ struct AnimalDetailsView: View {
             ListRowView(title: "Numero Passaporto", value: viewModel.animal.passaporto ?? "-")
             ListRowView(title: "Mantello", value: viewModel.animal.mantello ?? "-")
             ListRowView(title: "Descrizione", value: viewModel.animal.descrizione ?? "-")
-        }
-        .formStyle(.grouped)
     }
 }
 
