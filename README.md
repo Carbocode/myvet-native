@@ -3,8 +3,6 @@
 Versione nativa **Swift + SwiftUI** dell’app **MyVet**, sviluppata come trasposizione dell’originale.
 L’app si appoggia al **backend di sviluppo MyVet** tramite chiamate HTTP (REST API).
 
----
-
 ## 📖 Cos’è MyVet?
 
 **MyVet** è l’ecosistema digitale per la cura dei propri animali domestici, sviluppato dall’azienda MyVet.
@@ -14,8 +12,6 @@ Il suo core è offrire un insieme di funzionalità integrate per proprietari e v
 * 👩‍⚕️ **Contatto diretto con il Veterinario**: prenotazione visite e gestione appuntamenti.
 * 🥗 **Piano nutrizionale fresco a domicilio**.
 * 🗺️ **Mappa interattiva**: scoperta degli specialisti nelle vicinanze.
-
----
 
 ## 🚀 Funzionalità implementate
 
@@ -32,8 +28,6 @@ Questa versione nativa **Swift/SwiftUI** include:
 * 🎨 **Personalizzazione tema**: supporto a temi chiari/scuri.
 * 🖥️ **Supporto MacOS Nativo**: interfaccia personalizzata appositamente per essere buildata tramite AppKit, personalizzando molte schermate tramite tag di compilazione.
 
----
-
 ## 🛠️ Stack Tecnologico
 
 * **Linguaggi**: Swift
@@ -41,8 +35,6 @@ Questa versione nativa **Swift/SwiftUI** include:
 * **Autenticazione**: JWT Token, Sign in with Apple
 * **Ricerca**: ElasticSearch
 * **Persistenza locale**: UserDefaults / LocalStorage
-
----
 
 ## 📲 Requisiti
 
