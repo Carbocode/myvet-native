@@ -13,8 +13,7 @@ struct LoginView: View {
     var body: some View {
         
 #if os(iOS)
-        Form {
-            
+        VStack {
             TextField("Email", text: $viewModel.loginRequest.Email)
                 .padding()
                 .glassEffect()
@@ -54,16 +53,14 @@ struct LoginView: View {
             
         }
         .navigationTitle("Login")
+        .navigationBarTitleDisplayMode(.large)
         .frame(maxHeight: .infinity, alignment: .top)
         .frame(maxWidth: 400)
+        .formStyle(.columns)
         .padding()
 #elseif os(macOS)
         Form {
-            Section(header:
-                        Text("Login")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-            ){
+            Section(){
                 
                 TextField("Email", text: $viewModel.loginRequest.Email)
                 

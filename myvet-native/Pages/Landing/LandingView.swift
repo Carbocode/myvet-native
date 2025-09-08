@@ -19,9 +19,34 @@ struct LandingView: View {
     var body: some View {
         #if os(iOS)
         NavigationStack {
-            VStack{
-                buttons
-                backgroundImage
+            ZStack{
+                LinearGradient(
+                    gradient:
+                        Gradient(colors: [
+                        Color(red: 63/255, green: 179/255, blue: 218/255),
+                        Color(red: 58/255, green: 108/255, blue: 172/255)
+                    ]),
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+                .ignoresSafeArea()
+                
+                VStack {
+                    backgroundImage
+                        .frame(height: 500)
+                    Spacer()
+                    buttons
+                }
+                
+                VStack{
+                    Text("Benvenuto su MyVet!")
+                        .font(.largeTitle.bold())
+                        .multilineTextAlignment(.center)
+                        .padding(.top, 8)
+                        .foregroundColor(.white)
+                    
+                    Spacer()
+                }
             }
         }
         #elseif os(macOS)
@@ -33,6 +58,11 @@ struct LandingView: View {
                 }
                 .inspector(isPresented: $inspectorVisible){
                     NavigationStack {
+                        Text("Benvenuto su MyVet!")
+                            .font(.largeTitle.bold())
+                            .multilineTextAlignment(.center)
+                            .padding(.top, 8)
+                            .foregroundColor(.white)
                         buttons
                     }
                 }
@@ -43,24 +73,22 @@ struct LandingView: View {
     
     var buttons: some View{
         VStack(spacing: 24) {
-            Text("Benvenuto su MyVet!")
-                .font(.largeTitle.bold())
-                .multilineTextAlignment(.center)
-                .padding(.top, 8)
             
-            NavigationLink("Login") {
-                LoginView()
-            }
-            .tint(.blue)
-            .buttonStyle(.glass)
-            .disabled(viewModel.isLoading)
+            HStack{
+                NavigationLink("Login") {
+                    LoginView()
+                }
+                .tint(.blue)
+                .buttonStyle(.glass)
+                .disabled(viewModel.isLoading)
 
-            NavigationLink("Registrazione") {
-                UserFormView()
+                NavigationLink("Registrazione") {
+                    UserFormView()
+                }
+                .tint(.blue)
+                .buttonStyle(.glass)
+                .disabled(viewModel.isLoading)
             }
-            .tint(.blue)
-            .buttonStyle(.glass)
-            .disabled(viewModel.isLoading)
             
             SignInWithAppleButton(.signIn) { request in
                 request.requestedScopes = [.fullName, .email]
@@ -75,6 +103,8 @@ struct LandingView: View {
                 }
             }
             .signInWithAppleButtonStyle(.black)
+            .frame(width: 250, height: 45)
+            .cornerRadius(12)
             .disabled(viewModel.isLoading)
             
             Spacer()
